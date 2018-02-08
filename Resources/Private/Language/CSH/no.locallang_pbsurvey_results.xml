@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+    <data type="array">
+        <languageKey index="no" type="array">
+            <label index=".description">Resultat fra spørreundersøkelse.</label>
+            <label index=".details">Vis alle resultat fra spørreundersøkelsen som er avsluttet.</label>
+            <label index="_.seeAlso">tx_pbsurvey_item</label>
+            <label index="hidden.description">Bruk denne til midlertidig å eksludere resultatet fra visning og eksport
+                til csv-fil med modulen Web &gt; Spørreundersøkels.
+            </label>
+            <label index="hidden.details">sette dette valget er praktisk når resultat skal eksporteres til en csv-fil.
+                Du kan f.eks., ta bort det resultatet som bare var ment for testing.
+            </label>
+            <label index="survey.description">Tittelen på spørreundersøekslen som generer dette resultatet.</label>
+            <label index="survey.details">Ikke fjern dette feltet dersom du ønsker sikre resultat fra
+                spørreundersøkelse. Endre på dette feltet vil gjøre at resultatet ikke eksporteres til en csv-fil
+                spørsmålene ikke stemmer overens med de i spørreundersøkelsen.
+            </label>
+            <label index="_survey.seeAlso">tx_pbsurvey_item</label>
+            <label index="user.description">Navnet til frontend-brukeren som deltok i spørreundersøkelsen.</label>
+            <label index="user.details">Når en spørreundesøkelse har blitt gjennomført med frontend-brukere, vil
+                brukerene som deltok bli vist her.
+
+                Dersom spørreundersøkelsen er anonym, vil feltet være tomt.
+
+                Feltet brukes av modulen &quot;Web &gt; Spørreundersøkelse&quot; til å hente brukerens personlige
+                informasjon fra tabellen &quot;fe_users&quot; og setter denne inn i csv-fila.
+            </label>
+            <label index="_user.seeAlso">tx_pbsurvey_item, fe_users</label>
+            <label index="results.description">Felt som inneholder alle resutat fra en respondent.</label>
+            <label index="results.details">Ikke endre dette feltet uten at du vet hva du gjør.</label>
+            <label index="_results.seeAlso">tx_pbsurvey</label>
+        </languageKey>
+    </data>
+</T3locallangExt>

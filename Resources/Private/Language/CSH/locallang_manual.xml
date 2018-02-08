@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Introduction to Questionaire</description>
+        <type>CSH</type>
+        <csh_table>xEXT_pbsurvey</csh_table>
+        <fileId>EXT:pbsurvey/Resources/Private/Language/CSH/locallang_manual.xml</fileId>
+        <ext_filename_template>EXT:pbsurvey/Resources/Private/Language/CSH/###LANGKEY###.locallang_manual.xml
+        </ext_filename_template>
+        <labelContext type="array">
+        </labelContext>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index=".alttitle">Questionaire</label>
+            <label index=".description">Questionaire system for TYPO3.</label>
+            <label index=".details">Questionaire is an extension to take surveys from the visitors of your website. The
+                results can be exported to a csv-file to analyze in Microsoft Excel or the statistical program SPSS or
+                it's open source concurrent PSPP.
+            </label>
+            <label index="_.image"></label>
+            <label index=".image_descr"></label>
+            <label index=".syntax"></label>
+            <label index=".seeAlso"></label>
+            <label index="features.alttitle">Features</label>
+            <label index="features.description">16 different questions and presentation items, including 7 open ended
+                questions, 4 matrix types, and 5 choice types
+                Visitors can enter the questionaires anonymous or by FE-login
+                Maximum number of responses per logged in user.
+                Optional update of response by respondent.
+                Different actions after taking a survey, like showing a message or closing the browser window.
+                Optional 'Cancel' and/or 'Back'-button
+                Multiple options if a user clicks the cancel button while taking a survey.
+                Page and question numbering options.
+                Possibility to enter a default value for each question.
+                Make questions mandatory.
+                Pagebreaks
+                Show or hide pages from the respondent based on page conditions.
+                Error check on given answers.
+                2 formats of exporting the data format.
+                Styling by template file and Cascading Style Sheets (CSS).
+                Configuration by FlexForm or TypoScript.
+                XHTML-strict output.
+            </label>
+            <label index="tutorial.alttitle">Tutorial</label>
+            <label index="tutorial.description">In this tutorial you will learn how to create a questionaire on your
+                website. The questionaire in this tutorial will do it anonymous. Visitors do not need to register and
+                log in. Visitors can enter the questionaire unlimited. You already need to know the basic principles of
+                TYPO3. The default template file will be used.
+            </label>
+            <label index="step1.alttitle">Tutorial - step 1</label>
+            <label index="step1.description">Create a new SysFolder to store the questionaire items and results. This
+                step is optional but recommended. You can do this by using the module 'Web &gt; Page' or 'Web &gt;
+                List'. In the example below the name of this folder is 'Questionaire Storage'.
+            </label>
+            <label index="step2.alttitle">Tutorial - step 2</label>
+            <label index="step2.description">Create a new page which shall display the questionaire to the visitors of
+                your website. In the example below this is the page with the name 'Questionaire'.
+            </label>
+            <label index="step3.alttitle">Tutorial - step 3</label>
+            <label index="step3.description">Go to the module 'Web &gt; Page'. Choose the page you just made in step 2
+                in the site tree. Click the button 'Create page content'. You will enter the wizard to add new content
+                elements. Click the button 'Questionaire' which is in the subpart 'Plugins'.
+            </label>
+            <label index="step3.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-1-2-3_en.png
+            </label>
+            <label index="step3.image_descr">Step 1 - 3: Create page and storage folder. Insert the plugin.</label>
+            <label index="step4.alttitle">Tutorial - step 4</label>
+            <label index="step4.description">The FlexForm for the configuration of the extension is shown. Click on the
+                tab 'General'. At 'Startingpoint' you click the button at the right side to open the TYPO3 Element
+                Browser. Select the sysfolder you created for storage of the questionaire items and results. In this
+                example this is the folder with the name 'Questionaire Storage'.
+            </label>
+            <label index="step4.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-4_en.png</label>
+            <label index="step4.image_descr">Step 4: Select the 'Starting Point' of the plugin.</label>
+            <label index="step5.alttitle">Tutorial - step 5</label>
+            <label index="step5.description">Enter the rest of the configuration according to your wishes.</label>
+            <label index="step5.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-5_en.png</label>
+            <label index="step5.image_descr">Step 5: Configuration of the plugin.</label>
+            <label index="step6.alttitle">Tutorial - step 6</label>
+            <label index="step6.description">Go to the module 'Web &gt; List' and click on the sysfolder for storage of
+                the questionaire items (in our example 'Questionaire Storage). Click the button 'Create new record'. In
+                the 'New record wizard' you select 'Questionaire item'.
+            </label>
+            <label index="step6.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-6_en.png</label>
+            <label index="step6.image_descr">Step 6: Create new Questionaire items.</label>
+            <label index="step7.alttitle">Tutorial - step 7</label>
+            <label index="step7.description">Select a 'Question Type' in the dropdown list. The form will adapt
+                according to the selected type.
+            </label>
+            <label index="step8.alttitle">Tutorial - step 8</label>
+            <label index="step8.description">Enter the values of the fields the way you like to ask the question.
+            </label>
+            <label index="step9.alttitle">Tutorial - step 9</label>
+            <label index="step9.description">Answers can be entered using the field 'Enter the Answers'. If you like to
+                enter more options for each answer, click the 'Answer Wizard' button at the right side of this field.
+            </label>
+            <label index="step10.alttitle">Tutorial - step 10</label>
+            <label index="step10.description">Save the item and close the document. Repeat step 7 till 10 to add more
+                items.
+            </label>
+            <label index="step10.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-7-8-9-10_en.png
+            </label>
+            <label index="step10.image_descr">Step 7 - 10: Filling the item.</label>
+            <label index="step11.alttitle">Tutorial - step 11</label>
+            <label index="step11.description">You are back in the module 'Web &gt; list'. An overview of all questions
+                made by you is presented.
+            </label>
+            <label index="step11.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-11_en.png</label>
+            <label index="step11.image_descr">Step 11: An overview of all questions.</label>
+            <label index="step12.alttitle">Tutorial - step 12</label>
+            <label index="step12.description">Check if all questions are correctly reflected by checking the page in the
+                fronted of TYPO3. If you still want to do some modifications, you can do this in the backend hereafter.
+            </label>
+            <label index="step12.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-12_en.png</label>
+            <label index="step12.image_descr">Step 12: Checking all questions in the frontend of TYPO3.</label>
+            <label index="step13.alttitle">Tutorial - step 13</label>
+            <label index="step13.description">If all questions have been well entered, you can create 'Page Break and
+                Conditions' records in the list . In our example we create a page separation after the second question.
+                The first two questions will be displayed on the fist page, all following on page 2.
+            </label>
+            <label index="step13.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-13_en.png</label>
+            <label index="step13.image_descr">Step 13: Add a page break.</label>
+            <label index="step14.alttitle">Tutorial - step 14</label>
+            <label index="step14.description">Select 'Page Break and Conditions' in the bottom of the dropdown list. The
+                form will adapt to this choice. Enter a possible page title and an introduction text.
+            </label>
+            <label index="step15.alttitle">Tutorial - step 15</label>
+            <label index="step15.description">If you want to add conditions to a page, click on the button 'Condition
+                Wizard' at the right side of the conditions field.
+            </label>
+            <label index="step15.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-14-15_en.png
+            </label>
+            <label index="step15.image_descr">Step 14 and 15: Insert a page break.</label>
+            <label index="step16.alttitle">Tutorial - step 16</label>
+            <label index="step16.description">Add conditions which shall be compared to the previous answers. If the
+                conditions evaluate to 'True', the page is displayed. In this manual the functioning of the 'Condition
+                Wizard' is explained separately.
+            </label>
+            <label index="step16.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-16_en.png</label>
+            <label index="step16.image_descr">Step 16: The Page Conditions Wizard.</label>
+            <label index="step17.alttitle">Tutorial - step 17</label>
+            <label index="step17.description">Check in the frontend of TYPO3 if all conditions are satisfying.</label>
+            <label index="step18.alttitle">Tutorial - step 18</label>
+            <label index="step18.description">Make the questionaire public and visible for your visitors.</label>
+            <label index="step19.alttitle">Tutorial - step 19</label>
+            <label index="step19.description">After closing the questionaire, you can export all results for use in
+                spreadsheet software as MS Excell or statistical software such as SPSS. Go to the module 'Web &gt;
+                Questionaire'. Select the storage folder for questionaire items in the site structure. The module will
+                show you an overview how many visitors participated in the questionaire. Choose an export method and
+                click the button 'Export CSV file'. Save the file on your local hard disk for further processing.
+            </label>
+            <label index="step19.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-19_en.png</label>
+            <label index="step19.image_descr">Step 19: The Questionaire module.</label>
+        </languageKey>
+        <languageKey index="nl">EXT:pbsurvey/Resources/Private/Language/CSH/nl.locallang_manual.xml</languageKey>
+        <languageKey index="no">EXT:pbsurvey/Resources/Private/Language/CSH/no.locallang_manual.xml</languageKey>
+    </data>
+    <orig_hash type="array">
+    </orig_hash>
+    <orig_text type="array">
+    </orig_text>
+</T3locallang>

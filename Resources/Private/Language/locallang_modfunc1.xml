@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Language labels of Questionaire overview module</description>
+        <type>module</type>
+        <csh_table></csh_table>
+        <fileId>EXT:pbsurvey/Resources/Private/Language/locallang_modfunc1.xml</fileId>
+        <labelContext type="array">
+        </labelContext>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index="moduleFunction">Overview</label>
+            <label index="title">Questionaire Overview</label>
+            <label index="number_questions">Number of questions</label>
+            <label index="number_results_finished">Finished responses</label>
+            <label index="number_results_unfinished">Unfinished responses</label>
+            <label index="number_results_all">Total number of responses</label>
+            <label index="list_questions">List of questions</label>
+        </languageKey>
+    </data>
+</T3locallang>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>CSH for Web&gt;Questionaire module(s)</description>
+        <type>CSH</type>
+        <fileId>EXT:pbsurvey/Resources/Private/Language/CSH/locallang_mod1.xml</fileId>
+        <csh_table>_MOD_web_txpbsurveyM1</csh_table>
+        <keep_original_text>1</keep_original_text>
+        <ext_filename_template>EXT:pbsurvey/Resources/Private/Language/CSH/###LANGKEY###.locallang_mod1.xml
+        </ext_filename_template>
+        <labelContext type="array">
+        </labelContext>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index=".alttitle">Web &gt; Questionaire module</label>
+            <label index=".description">The idea of the Web&gt;Questionaire module is to be a host module for backend
+                applications that wish to present information / analysis of results of the Questionaire extension.
+            </label>
+        </languageKey>
+        <languageKey index="nl">EXT:pbsurvey/Resources/Private/Language/CSH/nl.locallang_mod1.xml</languageKey>
+    </data>
+    <orig_hash type="array">
+    </orig_hash>
+    <orig_text type="array">
+    </orig_text>
+</T3locallang>

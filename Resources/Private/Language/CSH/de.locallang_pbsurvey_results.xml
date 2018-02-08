@@ -1,0 +1,32 @@
+<T3locallangExt>
+    <data type="array">
+        <languageKey index="de" type="array">
+            <label index=".description">Umfrage Ergebnis</label>
+            <label index=".details">Zeigt alle Ergebnisse der Umfrage die abgeschlossen wurden.</label>
+            <label index="hidden.description">Benutzen Sie dies um temporär die Ergebnisse von der Anzeige zu
+                auschließen und mit dem Modul Web &gt; Umfrage als CSV Datei zu exportieren.
+            </label>
+            <label index="hidden.details">Diese Option zu setzen ist sinnvoll, wenn Sie die Ergebnisse als CSV Datei
+                exportieren. Sie können so zum Beispiel Ergebnisse die zu Testzwecken gemacht wurden ausschließen.
+            </label>
+            <label index="survey.description">Der Titel der Umfrage der dieses Ergebnis erzeugt hat.</label>
+            <label index="survey.details">Ändern Sie dieses Feld nicht wenn Sie ein zuverlässiges Ergebnis von der
+                Umfrage erhalten wollen. Das ändern dieser Einstellung schließt die Ergebnisse die als CSV Datei
+                exportiert wurden aus, wenn die Fragen nicht mit dennen der Umfrage übereinstimmen die dieses Ergebnis
+                erzeugt haben.
+            </label>
+            <label index="user.description">Der Name des Frontend Benutzers ist der gleiche wie der an der Umfrage
+                teilgenommen hat.
+            </label>
+            <label index="user.details">Wenn der Umfrageteilnehmer sich unter den eingelogten Frontend Benutzern
+                befindet, wird der Benutzer der teilgenommen hat hier angezeigt.
+                Wenn ein Umfrageteilnehmer anonym teilgenommen hat, bleibt das Feld leer.
+                Dieses Feld wird vom Modul &quot;Web &gt; Umfrage&quot; benutzt um die personenabhänige Informationen
+                aus der Tabelle &quot;fe_users&quot; auszuwählen und um diese Informationen in die CSV Datei einzufügen.
+            </label>
+            <label index="results.description">Dieses Feld enthält alle Antworten einer Rückantwort.</label>
+            <label index="results.details">Ändern Sie dieses Feld nicht, solange Sie nicht wissen was Sie machen!
+            </label>
+        </languageKey>
+    </data>
+</T3locallangExt>

@@ -1,0 +1,59 @@
+plugin.tx_pbsurvey_pi1 {
+	# cat=plugin.questionaire/file; type=file[html,htm,tmpl,txt]; label= Template File: This is a simple textfile where each part of Questionaire is defined with HTML-code. To see an example with explanations, take a look at EXT:pbsurvey/pi1/template.html  which is the default.
+	templateFile = EXT:pbsurvey/Resources/Private/Templates/template.html
+	# cat=plugin.questionaire//; type=int+; label=Storage PID: PID for storage of questionaire items and result. If you want a certain page to be used for storage of items, please enter the PID (page-uid) here.
+	pid =
+	# cat=plugin.questionaire/other; type=int[0-2]; label=Access-level: Type of Access-level for non-anonymous questionaires: 0=Multiple Response / 1=Single Response / 2=Single Reponse (No Update).
+	accessLevel = 0
+
+	# cat=plugin.questionaire/other; type=int+; label=Maximum Responses: Number of maximum responses to the questionaire. When reached, the questionaire will automatically stop.
+	maximumResponses = 0
+	# cat=plugin.questionaire/other; type=int+; label=User Responses: Only necessary when plugin.tx_pbsurvey_pi.accessLevel=2. Defines how often a participant can return to the questionaire and answer the questions.
+	userResponses = 0
+	# cat=plugin.questionaire/other; type=int+; label=Days for Update: Only necessary when plugin.tx_pbsurvey_pi.accessLevel=0. Timespan in which the participant can change his answers.
+	daysForUpdate = 60
+	# cat=plugin.questionaire/other; type=int+; label=Form Validation: Defines the way the form is validated: 0=Client Side JavaScript / 1=Server Side PHP (Accessibility) / 2=Both Server- and client side
+	validation = 1
+
+	anonymous {
+		# cat=plugin.questionaire/other; type=int[0-1]; label=Anonymous - Mode: Enter the method of checking the access when having an anonymous survey. 0=IP-address / 1=Cookie.
+		mode = 1
+		# cat=plugin.questionaire/other; type=int[0-9999]; label=Cookie Lifetime: The amount of days after the cookie will expire.
+		cookie_lifetime = 30
+	}
+
+	security {
+		# cat=plugin.questionaire/other; type=boolean; label=Security - Show Captcha before completion: A captcha is a type of challenge-response test to determine whether or not the user is human. It can be used to prevent automated participation in a survey.
+		captcha = 0
+	}
+
+	completion {
+		# cat=plugin.questionaire/other; type=int[0-2]; label=Completion - Action: Action to take when questionaire is finished. 0=Show Message / 1=Redirect to page / 2=Close Browser.
+		action = 1
+		# cat=plugin.questionaire/other; type=int+; label=Completion - Page: If the Completion Action is 'Display Message' or 'Redirect to another page', you can select a page here to redirect to or go to when 'Continue'-button is shown.
+		redirectPid =
+
+		button {
+			# cat=plugin.questionaire/other; type=boolean; label=Completion - Close Button: Show a button to close the current window.
+			close = 0
+			# cat=plugin.questionaire/other; type=boolean; label=Completion - Continue Button: If the Completion Action is 'Display Message' you can enter here if the 'Continue' button has to be shown.
+			continue = 0
+		}
+	}
+
+	navigation {
+		# cat=plugin.questionaire/other; type=boolean; label=Navigation - No Back Button: If checked the Back Button will not be shown in the Questionaire.
+		back = 1
+		# cat=plugin.questionaire/other; type=int[0-3]; label=Navigation - Cancel Button: Decides what action to take if the Cancel Button has been pressed.
+		cancel = 2
+		# cat=plugin.questionaire/other; type=boolean; label=Navigation - Cancel Button Page: Choose redirect page if cancel button has been pressed.
+		cancelPid =
+	}
+
+	numbering {
+		# cat=plugin.questionaire/other; type=int[0-3]; label=Numbering - Page Numbering: Enter the value of the type of page numbering you prefer.
+		page = 1
+		# cat=plugin.questionaire/other; type=int[0-2]; label=Numbering - Question Numbering: Enter the value of the type of question numbering you prefer.
+		question = 1
+	}
+}

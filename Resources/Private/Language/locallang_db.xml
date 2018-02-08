@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Language labels</description>
+        <type>database</type>
+        <csh_table></csh_table>
+        <fileId>EXT:pbsurvey/Resources/Private/Language/locallang_db.xml</fileId>
+        <labelContext type="array">
+        </labelContext>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index="tx_pbsurvey_item">Questionaire item</label>
+            <label index="tx_pbsurvey_item.question_type.I.0">Choice - Database Dropdown</label>
+            <label index="tx_pbsurvey_item.question_type.I.1">Choice - Multiple Answers (Checkboxes)</label>
+            <label index="tx_pbsurvey_item.question_type.I.23">Choice - Multiple Answers (Selectbox)</label>
+            <label index="tx_pbsurvey_item.question_type.I.2">Choice - One Answer (Dropdown)</label>
+            <label index="tx_pbsurvey_item.question_type.I.3">Choice - One Answer (Option Buttons)</label>
+            <label index="tx_pbsurvey_item.question_type.I.4">Choice - True/False</label>
+            <label index="tx_pbsurvey_item.question_type.I.5">Choice - Yes/No</label>
+            <label index="tx_pbsurvey_item.question_type.I.24">Choice - Image rating</label>
+            <label index="tx_pbsurvey_item.question_type.I.6">Matrix - Multiple Answers per Row (Checkboxes)</label>
+            <label index="tx_pbsurvey_item.question_type.I.7">Matrix - Multiple Answers per Row (Textboxes)</label>
+            <label index="tx_pbsurvey_item.question_type.I.8">Matrix - One Answer per Row (Option Buttons)</label>
+            <label index="tx_pbsurvey_item.question_type.I.9">Matrix - Rating Scale (Numeric)</label>
+            <label index="tx_pbsurvey_item.question_type.I.10">Open Ended - Comments Box</label>
+            <label index="tx_pbsurvey_item.question_type.I.11">Open Ended - Constant Sum</label>
+            <label index="tx_pbsurvey_item.question_type.I.12">Open Ended - Date</label>
+            <label index="tx_pbsurvey_item.question_type.I.13">Open Ended - Number</label>
+            <label index="tx_pbsurvey_item.question_type.I.14">Open Ended - One Line</label>
+            <label index="tx_pbsurvey_item.question_type.I.15">Open Ended - One or More Lines</label>
+            <label index="tx_pbsurvey_item.question_type.I.16">Open Ended - Ranking</label>
+            <label index="tx_pbsurvey_item.question_type.I.17">Presentation - Heading</label>
+            <label index="tx_pbsurvey_item.question_type.I.18">Presentation - Horizontal Rule (HR)</label>
+            <label index="tx_pbsurvey_item.question_type.I.19">Presentation - HTML</label>
+            <label index="tx_pbsurvey_item.question_type.I.20">Presentation - Image</label>
+            <label index="tx_pbsurvey_item.question_type.I.21">Presentation - Message</label>
+            <label index="tx_pbsurvey_item.question_type.I.22">Page Break &amp; Conditions</label>
+            <label index="tx_pbsurvey_item.question_type.I.99">Call User Defined Hook</label>
+            <label index="tx_pbsurvey_item.question_type">Question Type</label>
+            <label index="tx_pbsurvey_item.question">Question</label>
+            <label index="tx_pbsurvey_item.question_alias">Question Alias</label>
+            <label index="tx_pbsurvey_item.question_subtext">Question Subtext</label>
+            <label index="tx_pbsurvey_item.page_title">Page Title</label>
+            <label index="tx_pbsurvey_item.page_introduction">Page Introduction</label>
+            <label index="tx_pbsurvey_item.options_required">Required</label>
+            <label index="tx_pbsurvey_item.options_random">Random Order</label>
+            <label index="tx_pbsurvey_item.options_alignment.I.0">Vertical</label>
+            <label index="tx_pbsurvey_item.options_alignment.I.1">Horizontal</label>
+            <label index="tx_pbsurvey_item.options_alignment">Answer Alignment</label>
+            <label index="tx_pbsurvey_item.options_minimum_responses">Minimum Number of Responses</label>
+            <label index="tx_pbsurvey_item.options_maximum_responses">Maximum Number of Responses</label>
+            <label index="tx_pbsurvey_item.options_row_heading_width">Row Heading Width</label>
+            <label index="tx_pbsurvey_item.rows">Row Names</label>
+            <label index="tx_pbsurvey_item.answers">Enter the Answers</label>
+            <label index="tx_pbsurvey_item.answers_wiz">Answers Wizard</label>
+            <label index="tx_pbsurvey_item.answers_allow_additional">Allow additional answer</label>
+            <label index="tx_pbsurvey_item.answers_text_additional">Additional Answer</label>
+            <label index="tx_pbsurvey_item.answers_text_additional.default">Other, please specify</label>
+            <label index="tx_pbsurvey_item.answers_type_additional.I.0">Textbox</label>
+            <label index="tx_pbsurvey_item.answers_type_additional.I.1">Textarea</label>
+            <label index="tx_pbsurvey_item.answers_type_additional">Additional Answer Input Type</label>
+            <label index="tx_pbsurvey_item.answers_none">Add -none- value to answers</label>
+            <label index="tx_pbsurvey_item.textarea_width">Textarea width</label>
+            <label index="tx_pbsurvey_item.textarea_height">Textarea height</label>
+            <label index="tx_pbsurvey_item.selectbox_height">Selectbox height</label>
+            <label index="tx_pbsurvey_item.display_type">Display Type</label>
+            <label index="tx_pbsurvey_item.display_type.I.0">Dropdown</label>
+            <label index="tx_pbsurvey_item.display_type.I.1">Radio Buttons - Horizontal</label>
+            <label index="tx_pbsurvey_item.display_type.I.2">Radio Buttons - Vertical</label>
+            <label index="tx_pbsurvey_item.default_value_tf">Default value</label>
+            <label index="tx_pbsurvey_item.default_value_tf.I.0">--None--</label>
+            <label index="tx_pbsurvey_item.default_value_tf.I.1">True</label>
+            <label index="tx_pbsurvey_item.default_value_tf.I.2">False</label>
+            <label index="tx_pbsurvey_item.default_value_yn">Default value</label>
+            <label index="tx_pbsurvey_item.default_value_yn.I.0">--None--</label>
+            <label index="tx_pbsurvey_item.default_value_yn.I.1">Yes</label>
+            <label index="tx_pbsurvey_item.default_value_yn.I.2">No</label>
+            <label index="tx_pbsurvey_item.negative_first">Negative value (false/no) first in order</label>
+            <label index="tx_pbsurvey_item.default_value_txt">Default value</label>
+            <label index="tx_pbsurvey_item.default_date">Default value</label>
+            <label index="tx_pbsurvey_item.default_value_num">Default value</label>
+            <label index="tx_pbsurvey_item.beginning_number">Beginning number</label>
+            <label index="tx_pbsurvey_item.ending_number">Ending number</label>
+            <label index="tx_pbsurvey_item.total_number">Answer total</label>
+            <label index="tx_pbsurvey_item.minimum_date">Minimum value</label>
+            <label index="tx_pbsurvey_item.maximum_date">Maximum value</label>
+            <label index="tx_pbsurvey_item.minimum_value">Minimum value</label>
+            <label index="tx_pbsurvey_item.maximum_value">Maximum value</label>
+            <label index="tx_pbsurvey_item.maximum_length">Maximum length</label>
+            <label index="tx_pbsurvey_item.image">Image</label>
+            <label index="tx_pbsurvey_item.images">Images</label>
+            <label index="tx_pbsurvey_item.image_height">Maximum image height</label>
+            <label index="tx_pbsurvey_item.image_width">Maximum image width</label>
+            <label index="tx_pbsurvey_item.image_alignment">Image alignment</label>
+            <label index="tx_pbsurvey_item.image_alignment.I.0">Default</label>
+            <label index="tx_pbsurvey_item.image_alignment.I.1">Left</label>
+            <label index="tx_pbsurvey_item.image_alignment.I.2">Center</label>
+            <label index="tx_pbsurvey_item.image_alignment.I.3">Right</label>
+            <label index="tx_pbsurvey_item.sql">Enter the SQL</label>
+            <label index="tx_pbsurvey_item.email">Is E-mail Address</label>
+            <label index="tx_pbsurvey_item.heading">Enter the heading</label>
+            <label index="tx_pbsurvey_item.html">Enter the HTML</label>
+            <label index="tx_pbsurvey_item.message">Enter the message</label>
+            <label index="tx_pbsurvey_item.conditions">Page conditions</label>
+            <label index="tx_pbsurvey_item.conditions_wiz">Condition Wizard</label>
+            <label index="tx_pbsurvey_item.styleclass">Additional CSS style</label>
+            <label index="tx_pbsurvey_results">Questionaire Result</label>
+            <label index="tx_pbsurvey_results.survey">Survey</label>
+            <label index="tx_pbsurvey_results.user">User</label>
+            <label index="tx_pbsurvey_results.ip">IP address</label>
+            <label index="tx_pbsurvey_results.finished">Finished</label>
+            <label index="tx_pbsurvey_results.begintstamp">Start time</label>
+            <label index="tx_pbsurvey_results.endtstamp">End time</label>
+            <label index="tx_pbsurvey_results.language">Language</label>
+            <label index="tx_pbsurvey_results.history">History</label>
+            <label index="tx_pbsurvey_answers">Questionaire Answer</label>
+            <label index="tx_pbsurvey_answers.result">Result</label>
+            <label index="tx_pbsurvey_answers.question">Question</label>
+            <label index="tx_pbsurvey_answers.row">Row</label>
+            <label index="tx_pbsurvey_answers.column">Column</label>
+            <label index="tx_pbsurvey_answers.answer">Answer</label>
+            <label index="tt_content.list_type_pi1">Questionaire</label>
+        </languageKey>
+    </data>
+</T3locallang>

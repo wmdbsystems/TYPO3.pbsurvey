@@ -1,0 +1,32 @@
+<T3locallangExt>
+    <data type="array">
+        <languageKey index="nl" type="array">
+            <label index=".description">Enquete resultaten</label>
+            <label index=".details">Toon alle resultaten van de enquete die ingevuld zijn.</label>
+            <label index="hidden.description">Gebruik dit om tijdelijk het tonen van de resultaten uit te sluiten en het
+                csv-bestand te exporteren met de module Web &gt; Questionaire.
+            </label>
+            <label index="hidden.details">Het is zinvol deze optie in te stellen als u de resultaten wilt exporteren
+                naar een csv-bestand. U kunt bijvoorbeeld dit resultaat uitsluiten als het alleen voor testdoeleinden
+                bedoeld is.
+            </label>
+            <label index="survey.description">De titel van de enquete dat dit resultaat gegenereerd heeft.</label>
+            <label index="survey.details">Wijzig dit veld niet indien u betrouwbare resultaten wilt van de enquete. Het
+                wijzigen van dit veld zorgt er voor dat de resultaten niet ge-exporteerd worden naar een csv-bestand als
+                de vragen niet overeenkomen met de vragen uit de enquete die dit resultaat gegenereerd hebben.
+            </label>
+            <label index="user.description">De naam van de frontendgebruiker die deelgenomen heeft aan deze enquete.
+            </label>
+            <label index="user.details">Als een enquete afgenomen is tussen ingelogde frontendgebruikers, dan wordt de
+                deelnemer hier getoond.
+
+                Als een enquete anoniem afgenomen is, dan is dit veld leeg.
+
+                Dit veld wordt gebruikt door de module &quot;Web &gt; Questionaire&quot; om de persoonlijke informatie
+                te extraheren uit de tabel &quot;fe_users&quot; en deze informatie in te voegen in het csv-bestand.
+            </label>
+            <label index="results.description">Dit veld bevat alle antwoorden van enkele respons.</label>
+            <label index="results.details">Wijzig dit veld niet tenzij u weet wat u doet!</label>
+        </languageKey>
+    </data>
+</T3locallangExt>

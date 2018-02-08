@@ -1,0 +1,113 @@
+<T3locallangExt>
+    <data type="array">
+        <languageKey index="nl" type="array">
+            <label index=".description">Enquetesysteem voor TYPO3</label>
+            <label index=".details">Voeg vragen, paginascheiding, condities of presentatie-items toe aan de enquete.
+            </label>
+            <label index="hidden.description">Verberg item van tonen in de enquete.</label>
+            <label index="hidden.details">Deze optie is praktisch tijdens het testen van de enquete. Wijzig deze optie
+                niet als de enquete al online is. Dit heeft invloed op de betrouwbaarheid van de resultaten.
+            </label>
+            <label index="question_type.description">Maak uw keuze uit zo'n 20 vraagtypes, inclusief vier soorten
+                matrixvragen, waarderingsvragen, dropdownlijsten, open vragen, checkboxen en meer.
+            </label>
+            <label index="question.description">Gebruik dit veld om tekst voor uw vraag of input.</label>
+            <label index="question_alias.description">Voeg uw alternatieve tekst voor gebruik in rapporten in. Als u dit
+                veld leeg houdt dan wordt de vraag getoond.
+            </label>
+            <label index="question_subtext.description">Voeg informatieve of extra tekst in die onder uw vraag getoond
+                wordt.
+            </label>
+            <label index="options_required.description">Vink dit vakje aan als er een antwoord op deze vraag vereist
+                is.
+            </label>
+            <label index="options_random.description">Vink dit vakje aan indien de vragen op willekeurige volgorde
+                getoond moeten worden.
+            </label>
+            <label index="options_alignment.description">Selecteer de uitlijning van de vragen op de pagina.</label>
+            <label index="options_minimum_responses.description">Vul het minimum aantal antwoorden in dat gegeven MOET
+                worden.
+            </label>
+            <label index="options_maximum_responses.description">Vul het maximum aantal antwoorden in dat gegeven kan
+                worden.
+            </label>
+            <label index="options_row_heading_width.description">Vul hier de breedte, in pixels, van de kolom voor de
+                headers van de rijen.
+            </label>
+            <label index="rows.description">Voer de namen voor elke rij in op een nieuwe regel.</label>
+            <label index="answers.description">Voer elk van de antwoorden in op een nieuwe regel in onderstaand
+                tekstvak. Klik het 'assistent'-icoon voor extra opties.
+            </label>
+            <label index="answers_allow_additional.description">Vink dit vakje aan indien u een additioneel &quot;Ander&quot;
+                antwoord wilt toevoegen.
+            </label>
+            <label index="answers_text_additional.description">U kunt de tekst die bij &quot;Ander&quot; getoond wordt
+                wijzigen in onderstaand tekstveld.
+            </label>
+            <label index="answers_type_additional.description">Selecteer de manier waarop het additionele antwoord
+                getoond dient te worden.
+            </label>
+            <label index="display_type.description">Selecteer het formaat van de reactie op de vraag.</label>
+            <label index="default_value_tf.description">Deze waarde wordt geselecteerd als standaardwaarde voor deze
+                vraag.
+            </label>
+            <label index="default_value_yn.description">Deze waarde wordt geselecteerd als de standaardwaarde voor deze
+                vraag.
+            </label>
+            <label index="default_value_txt.description">De hieronder ingevoerde waarde wordt getoond als
+                standaardwaarde voor deze vraag.
+            </label>
+            <label index="default_date.description">De hieronder ingevoerde datum zal de standaardwaarde zijn. Formaat
+                voor de datum is dd-mm-yyy
+            </label>
+            <label index="default_value_num.description">De hieronder ingevoerde waarde wordt getoond als
+                standaardwaarde voor deze vraag.
+            </label>
+            <label index="beginning_number.description">Vul het eerste cijfer in voor de waarderingsschaal.</label>
+            <label index="ending_number.description">Vul het laatste cijfer in voor de waarderingsschaal.</label>
+            <label index="total_number.description">Vul de som van de totalen in. Laat het veld leeg om alle waardes toe
+                te staan.
+            </label>
+            <label index="minimum_date.description">Vul de vroegst acceptabele datum in. Formaat voor de datum is
+                dd-mm-yyy
+            </label>
+            <label index="maximum_date.description">Vul de laatst acceptabele datum in. Formaat voor de datum is
+                dd-mm-yyy
+            </label>
+            <label index="minimum_value.description">Vul de kleinst mogelijke waarde in.</label>
+            <label index="maximum_value.description">Vul de grootst mogelijke waarde in.</label>
+            <label index="maximum_length.description">Vul het maximaal aantal toegestane karakters voor deze vraag in.
+            </label>
+            <label index="image.description">Hier kunt u een afbeelding toekennen die getoond wordt in de enquete.
+            </label>
+            <label index="image_height.description">Vul een waarde in om de hoogte van de afbeelding te wijzigen.
+            </label>
+            <label index="image_width.description">Vul een waarde in om de breedte van de afbeelding te wijzigen.
+            </label>
+            <label index="image_alignment.description">Selecteer de horizontale uitlijning voor de afbeelding.</label>
+            <label index="sql.description">De SQL dient twee kolommen te bevatten ge-aliased als ItemValue en
+                ItemDisplay.
+            </label>
+            <label index="email.description">Vink dit vakje aan als het antwoord op deze vraag een geldig e-mailadres
+                moet zijn.
+            </label>
+            <label index="heading.description">Vul de tekst voor de header in.</label>
+            <label index="html.description">Gebruik dit veld om iedere HTML en/of inhoud in te voeren. Tekst wordt
+                getoond aan de hand van de ingevoerde HTML tags.
+            </label>
+            <label index="message.description">Vul de tekst voor het bericht in.</label>
+            <label index="page_title.description">Vul een optionele paginatitel in.</label>
+            <label index="page_introduction.description">Vul een optionele pagina-introductie in.</label>
+            <label index="conditions.description">Klik op het &quot;Assistent&quot;-icoon om condities in te voeren.
+            </label>
+            <label index="conditions.details">Paginacondities in dezelfde groep worden samen ge-evalueerd met een AND
+                operator. Elke groep wordt ge-evalueerd met andere groepen gebruikmakend van de OR operator. Maak
+                gebruik van een enkele groep om alle paginacondities te evalueren.
+
+                Creeer een paginaconditie door een vraag te selecteren van de voorgaande pagina. Specificeer operator en
+                vraag in het &quot;Assistent&quot;-formulier. Let er op dat de &quot;Provided[vertaling]&quot; en &quot;Not
+                provided[vertaling]&quot; operators geen vraag behoeven.
+            </label>
+        </languageKey>
+    </data>
+</T3locallangExt>

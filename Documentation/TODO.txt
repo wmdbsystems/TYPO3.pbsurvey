@@ -1,0 +1,11 @@
+- Do a check in the answers wizard of a not default language if the user used one of the predefined groups in the dropdown. If so, fill the answers wizard automatically.
+- Extend the conditions wizard using different steps to guide the BE-user.
+- Add the following to the conditions wizard:
+  Step 1: Choice between "Page condition" or "Branching conditions".
+  Step 2: Choice between "Answers to single questions" or "Value of total scoring"
+  Step 3: Show form according to choices.
+  
+  Add "unique in database" and "not unique in database" to the conditions to check, for instance, if e-mailadres is already there.
+
+Add the possibility to every question item to use its own template instead of the default
+  

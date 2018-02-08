@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+    <data type="array">
+        <languageKey index="nl" type="array">
+            <label index=".alttitle">Enquete</label>
+            <label index=".description">Enquete systeem voor TYPO3</label>
+            <label index=".details">Questionaire is een extensie om enquetes af te nemen onder bezoekers van uw website.
+                De verkregen resultaten kunt u exporteren naar een csv-bestand voor verdere analyse in Microsoft Excel
+                of de statistiekprogramma's SPSS en open source variant PSPP.
+            </label>
+            <label index="features.alttitle">Mogelijkheden</label>
+            <label index="features.description">16 verschillende vraag- en opmaaktypes waaronder 5 keuzevraagtypes, 4
+                matrixtypes en, 7 open vraagtypes.
+                Enquetes kunnen anoniem of door middel van een login worden ingevuld.
+                Ingelogde deelnemers begrenzen op het aantal deelnames.
+                Ingelogde deelnemers kunnen optioneel hun ingevoerde enquete wijzigen.
+                Diverse acties na het beeindigen van de enquete, zoals het tonen van een bericht of het sluiten van het
+                browservenster.
+                Optioneel tonen van 'Annuleer'- en 'Terug'-button.
+                Actie bepalen als de deelnemer op de 'Annuleer'-button klikt.
+                Diverse mogelijkheden voor vraag- en paginanummering.
+                Standaard waarden voor antwoorden ingeven.
+                Antwoorden optioneel verplichten.
+                De enquete kan ingedeeld worden in meerdere pagina's.
+                Het tonen van pagina's kan door middel van condities bepaald worden aan de hand van voorgaande
+                antwoorden.
+                Controle op de juiste invoer van antwoorden
+                2 indelingssoorten van het te exporteren csv-bestand.
+                Opschoning van csv-bestand voor gebruik in SPSS.
+                Opmaak is geheel te wijzigen met behulp van een sjabloonbestand en CSS.
+                In te stellen via FlexForm of TS.
+            </label>
+            <label index="tutorial.alttitle">Tutorial</label>
+            <label index="tutorial.description">In onderstaande tutorial laten we op eenvoudige wijze zien hoe een
+                enquete in een website geplaatst wordt. Het voorbeeld gaat uit van een anoniem af te nemen enquete, dat
+                wil zeggen dat de bezoekers van uw website niet hoeven in te loggen om aan de enquete mee te doen.
+                Bezoekers kunnen ongelimiteerd deelnemen. Deze tutorial gaat er vanuit dat u de basis van TYPO3 kent. Er
+                wordt gebruik gemaakt van de standaard template van de extensie.
+            </label>
+            <label index="step1.alttitle">Tutorial - stap 1</label>
+            <label index="step1.description">Maak een nieuwe systeemmap (SysMap) waarin de enqueteonderdelen en
+                resultaten opgeslagen zullen worden. Deze stap is optioneel maar erg aan te raden. Dit kunt u doen in de
+                module 'Web &gt; Pagina' of 'Web &gt; Lijst'. In onderstaand voorbeeld hebben we de map 'Enquete-opslag'
+                genoemd.
+            </label>
+            <label index="step2.alttitle">Tutorial - stap 2</label>
+            <label index="step2.description">Maak een nieuwe pagina waarin de enquete getoond wordt, in het voorbeeld
+                'Enquete'.
+            </label>
+            <label index="step3.alttitle">Tutorial - stap 3</label>
+            <label index="step3.description">Ga naar de module 'Web &gt; Pagina' en in de sitestructuur naar de pagina
+                waarin de enquete getoond moet worden.Klik hierin op de knop 'Maak pagina-inhoud'. U komt nu in de
+                assistent om nieuwe inhoudselementen toe te voegen aan de pagina. Onder de kop 'Plugins' staat de knop
+                voor een nieuwe enquete. Klik hierop.
+            </label>
+            <label index="step3.image_descr">Stap 1 tot en met 3: Benodigde pagina en systeemmap aanmaken en plugin in
+                pagina plaatsen.
+            </label>
+            <label index="step4.alttitle">Tutorial - stap 4</label>
+            <label index="step4.description">U ziet nu de FlexForm voor de configuratie van de enquete. Klik op het
+                tabblad 'Algemeen'. Bij 'Startpunt:' klikt u op de button om de TYPO3 Element Verkenner te openen. Hier
+                selecteert u de systeemmap waarin de enqueteonderdelen worden bewaard. In ons voorbeeld is dat de map
+                'Enquete-opslag'.
+            </label>
+            <label index="step4.image_descr">Stap 4: Het 'Startpunt' vastleggen voor de plugin.</label>
+            <label index="step5.alttitle">Tutorial - stap 5</label>
+            <label index="step5.description">Configureer de rest van de enquete naar uw wensen.</label>
+            <label index="step5.image_descr">Stap 5: Configuratie van de plugin.</label>
+            <label index="step6.alttitle">Tutorial - stap 6</label>
+            <label index="step6.description">Ga naar de module 'Web &gt; Lijst' en klik op de systeemmap voor de opslag
+                van enquete-items (in voorbeeld 'Enquete-opslag'). Klik op de knop voor een 'Nieuwe record'. In de
+                assistent voor 'Nieuwe records' klikt u op 'Enquete-item'.
+            </label>
+            <label index="step6.image_descr">Stap 6: Nieuwe enquete-items maken.</label>
+            <label index="step7.alttitle">Tutorial - stap 7</label>
+            <label index="step7.description">Kies een 'Vraagtype'. Het formulier van het enquete-item zal zich aanpassen
+                naar het type.
+            </label>
+            <label index="step8.alttitle">Tutorial - stap 8</label>
+            <label index="step8.description">Vul vervolgens de velden in het formulier naar gelang u de vraag wilt
+                stellen.
+            </label>
+            <label index="step9.alttitle">Tutorial - stap 9</label>
+            <label index="step9.description">Antwoorden kunt u invullen in het veld 'Vul de antwoorden in'. Wilt u meer
+                opties gebruiken waaronder een standaard waarde of punten aan een antwoord toekennen, klik dan op de
+                knop 'Anwoorden assistent' rechts van het veld.
+            </label>
+            <label index="step10.alttitle">Tutorial - stap 10</label>
+            <label index="step10.description">Sla vervolgens de vraag op en sluit het venster. Herhaal stap 7 tot en met
+                10 om meer vragen toe te voegen.
+            </label>
+            <label index="step10.image_descr">Stap 7 tot en met 10: Een enquete-item maken.</label>
+            <label index="step11.alttitle">Tutorial - stap 11</label>
+            <label index="step11.description">U bent weer terug in de module 'Web &gt; Lijst'. Hierin zit u een
+                overzicht van alle door u gemaakte vragen.
+            </label>
+            <label index="step11.image_descr">Stap 11: Een overzicht van alle enquete-items.</label>
+            <label index="step12.alttitle">Tutorial - stap 12</label>
+            <label index="step12.description">Controleer of alle vragen juist weergegeven worden door de pagina te
+                controleren in het frontend van TYPO3. Mocht u nog wijzigingen aan willen brengen, dan kunt u dit hierna
+                doen in het backend.
+            </label>
+            <label index="step12.image_descr">Stap 12: Controle van alle vragen in het frontend van TYPO3.</label>
+            <label index="step13.alttitle">Tutorial - stap 13</label>
+            <label index="step13.description">Als alle vragen goed zijn ingevoerd, kunt u tussen de records in de lijst
+                'Enquete items' in de module 'Web &gt; Lijst' nieuwe records aanmaken voor 'Paginascheiding en
+                condities'. In het voorbeeld plaatsen we de paginascheiding na de tweede vraag. De eerste twee vragen
+                staan dan op pagina 1, alle volgende op pagina 2.
+            </label>
+            <label index="step13.image_descr">Stap 13: Aanbrengen van een paginascheiding.</label>
+            <label index="step14.alttitle">Tutorial - stap 14</label>
+            <label index="step14.description">Kies in de keuzelijst 'Vraagtype' de optie 'Paginascheiding en condities'.
+                Het formulier zal zich aanpassen naar deze keuze. Vul een eventuele paginatitel in en een
+                introductietekst.
+            </label>
+            <label index="step15.alttitle">Tutorial - stap 15</label>
+            <label index="step15.description">Als u condities toe wilt voegen aan een pagina, klikt u op de button
+                'Conditie Assistent' rechts van het conditieveld.
+            </label>
+            <label index="step15.image_descr">Stap 14 en 15: Invoeren van een paginascheiding.</label>
+            <label index="step16.alttitle">Tutorial - stap 16</label>
+            <label index="step16.description">Voeg condities toe waaraan voldaan moet worden om de pagina te tonen. In
+                deze handleiding wordt de werking van de Conditie Assistent apart uitgelegd.
+            </label>
+            <label index="step16.image_descr">Stap 16: De pagina condities assistent.</label>
+            <label index="step17.alttitle">Tutorial - stap 17</label>
+            <label index="step17.description">Controleer in het Frontend van TYPO3 of alle condities voldoen aan uw
+                wensen.
+            </label>
+            <label index="step18.alttitle">Tutorial - stap 18</label>
+            <label index="step18.description">Maak de enquete zichtbaar voor uw bezoekers.</label>
+            <label index="step19.alttitle">Tutorial - stap 19</label>
+            <label index="step19.description">Na beeindiging van de enquete, kunt u alle resultaten exporteren voor
+                gebruik in een spreadsheetprogramma als MS Excell of een statistiekprogramma als SPSS. Hiervoor gaat u
+                naar de module 'Web &gt; Enquete'. Kies in de sitestructuur de systeemmap waarin alle resultaten zijn
+                opgeslagen. De module zal een overzicht tonen hoeveel bezoekers hebben deelgenomen aan de enquete. Kies
+                een exportmethode en klik op de knop 'Exporteer CSV-bestand'. Sla het bestand op op uw lokale harde
+                schijf voor verdere verwerking.
+            </label>
+            <label index="step19.image_descr">Stap 19: De Enquete module</label>
+            <label index="step3.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-1-2-3_en.png
+            </label>
+            <label index="step4.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-4_en.png</label>
+            <label index="step5.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-5_en.png</label>
+            <label index="step6.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-6_en.png</label>
+            <label index="step10.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-7-8-9-10_en.png
+            </label>
+            <label index="step11.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-11_en.png</label>
+            <label index="step12.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-12_en.png</label>
+            <label index="step13.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-13_en.png</label>
+            <label index="step15.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-14-15_en.png
+            </label>
+            <label index="step16.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-16_en.png</label>
+            <label index="step19.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-19_en.png</label>
+            <label index="_.image"></label>
+        </languageKey>
+    </data>
+    <orig_hash type="array">
+        <languageKey index="nl" type="array">
+            <label index=".alttitle" type="integer">195136475</label>
+            <label index=".description" type="integer">99528781</label>
+            <label index=".details" type="integer">238809587</label>
+            <label index="features.alttitle" type="integer">160397067</label>
+            <label index="features.description" type="integer">73907291</label>
+            <label index="tutorial.alttitle" type="integer">57212535</label>
+            <label index="tutorial.description" type="integer">209541488</label>
+            <label index="step1.alttitle" type="integer">202274792</label>
+            <label index="step1.description" type="integer">23125268</label>
+            <label index="step2.alttitle" type="integer">19136720</label>
+            <label index="step2.description" type="integer">218089777</label>
+            <label index="step3.alttitle" type="integer">137848077</label>
+            <label index="step3.description" type="integer">223649824</label>
+            <label index="step3.image_descr" type="integer">246196337</label>
+            <label index="step4.alttitle" type="integer">892755</label>
+            <label index="step4.description" type="integer">213462455</label>
+            <label index="step4.image_descr" type="integer">206415650</label>
+            <label index="step5.alttitle" type="integer">203179295</label>
+            <label index="step5.description" type="integer">250166963</label>
+            <label index="step5.image_descr" type="integer">212401678</label>
+            <label index="step6.alttitle" type="integer">112054764</label>
+            <label index="step6.description" type="integer">71438312</label>
+            <label index="step6.image_descr" type="integer">235850719</label>
+            <label index="step7.alttitle" type="integer">246174588</label>
+            <label index="step7.description" type="integer">9764526</label>
+            <label index="step8.alttitle" type="integer">83498399</label>
+            <label index="step8.description" type="integer">261144831</label>
+            <label index="step9.alttitle" type="integer">99183896</label>
+            <label index="step9.description" type="integer">186124984</label>
+            <label index="step10.alttitle" type="integer">187558243</label>
+            <label index="step10.description" type="integer">106749570</label>
+            <label index="step10.image_descr" type="integer">47778572</label>
+            <label index="step11.alttitle" type="integer">39570172</label>
+            <label index="step11.description" type="integer">129258505</label>
+            <label index="step11.image_descr" type="integer">250203811</label>
+            <label index="step12.alttitle" type="integer">8960916</label>
+            <label index="step12.description" type="integer">145351930</label>
+            <label index="step12.image_descr" type="integer">6814063</label>
+            <label index="step13.alttitle" type="integer">240514561</label>
+            <label index="step13.description" type="integer">34669811</label>
+            <label index="step13.image_descr" type="integer">234260924</label>
+            <label index="step14.alttitle" type="integer">216833086</label>
+            <label index="step14.description" type="integer">211634737</label>
+            <label index="step15.alttitle" type="integer">183660188</label>
+            <label index="step15.description" type="integer">230278373</label>
+            <label index="step15.image_descr" type="integer">228406017</label>
+            <label index="step16.alttitle" type="integer">149487530</label>
+            <label index="step16.description" type="integer">7063846</label>
+            <label index="step16.image_descr" type="integer">83330768</label>
+            <label index="step17.alttitle" type="integer">265132132</label>
+            <label index="step17.description" type="integer">191402734</label>
+            <label index="step18.alttitle" type="integer">56399033</label>
+            <label index="step18.description" type="integer">239376118</label>
+            <label index="step19.alttitle" type="integer">186466288</label>
+            <label index="step19.description" type="integer">79088280</label>
+            <label index="step19.image_descr" type="integer">152616784</label>
+            <label index="step3.image" type="integer">79480919</label>
+            <label index="step4.image" type="integer">90622549</label>
+            <label index="step5.image" type="integer">132680642</label>
+            <label index="step6.image" type="integer">25521356</label>
+            <label index="step10.image" type="integer">38646439</label>
+            <label index="step11.image" type="integer">201510009</label>
+            <label index="step12.image" type="integer">180162525</label>
+            <label index="step13.image" type="integer">256580490</label>
+            <label index="step15.image" type="integer">227711001</label>
+            <label index="step16.image" type="integer">192116299</label>
+            <label index="step19.image" type="integer">172787862</label>
+        </languageKey>
+    </orig_hash>
+    <orig_text type="array">
+        <languageKey index="nl" type="array">
+        </languageKey>
+    </orig_text>
+</T3locallangExt>

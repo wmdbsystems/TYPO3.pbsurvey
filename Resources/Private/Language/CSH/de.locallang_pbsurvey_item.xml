@@ -1,0 +1,116 @@
+<T3locallangExt>
+    <data type="array">
+        <languageKey index="de" type="array">
+            <label index=".description">Umfrage System für TYPO3</label>
+            <label index=".details">Fügen Sie Fragen, Seitenumbrüche, Bedingungen oder Darstellungselement zur
+                Umfrage.
+            </label>
+            <label index="hidden.description">Dieses Element nicht in der Umfrage anzeigen.</label>
+            <label index="hidden.details">Diese Einstellung ist praktisch um die Umfrage zu testen. Ändern Sie diese
+                Einstellung nicht wenn die Umfrage schon online ist. Es würde das Umfrage Ergebniss beeinflussen.
+            </label>
+            <label index="question_type.description">Wählen Sie aus über 20 Elementtypen, sie beinhalten vier Typen von
+                Matrix Fragen, Ranking Fragen, Auswahllisten, erweiterbare Textboxen, Checkboxen und mehr.
+            </label>
+            <label index="question.description">Benutzen Sie dieses Feld um den Text ihrer Frage einzugeben.</label>
+            <label index="question_alias.description">Geben Sie einen alternativen Text ein der im Report angezeigt
+                wird. Falls das Feld freigelassen wurde, wird die aktuelle Frage angezeigt.
+            </label>
+            <label index="question_subtext.description">Geben Sie einen zusätzlichen Text oder Informationen ein die
+                unter der Frage angezeigt werden.
+            </label>
+            <label index="options_required.description">Wählen Sie diese Option aus, wenn auf diese Frage einen Antwort
+                erforderlich ist.
+            </label>
+            <label index="options_random.description">Wählen Sie diese Option aus, wenn die Antworten zu dieser Frage in
+                zufälliger Reihenfolge angezeigt werden sollen.
+            </label>
+            <label index="options_alignment.description">Wählen Sie die Art auf die, die Antworten auf der Seite
+                ausgerichtet werden sollen.
+            </label>
+            <label index="options_minimum_responses.description">Wählen Sie die minimale Anzahl an Feldern die
+                ausgefüllt seien müssen.
+            </label>
+            <label index="options_maximum_responses.description">Wählen Sie die maximale Anzahl an Feldern die
+                ausgefüllt werden können.
+            </label>
+            <label index="options_row_heading_width.description">Geben Sie für die Zeilenüberschrift die Breite in
+                Pixelen an.
+            </label>
+            <label index="rows.description">Geben Sie jede Zeilenbezeichnung in einer extra Zeile ein.</label>
+            <label index="answers.description">Geben Sie unten jede Antwort in einer neue Zeile in ein neues Textfeld
+                ein. Klicken Sie auf die &quot;Wizard&quot;-Schaltfläche für zusätzliche Optionen
+            </label>
+            <label index="answers_allow_additional.description">Wählen Sie diese Option, wenn Sie eine zusätzliche
+                &quot;Andere&quot; Antwort erlauben wollen, um den Befragten die Möglichkeit eine eigenen Antwort zu
+                geben.
+            </label>
+            <label index="answers_text_additional.description">Sie können den Text der &quot;Anderen&quot; Eingabe in
+                dem Textfeld unterhalb bearbeiten.
+            </label>
+            <label index="answers_type_additional.description">Wählen Sie den Kontrolltyp, der für die zusätzliche
+                Antwort benutzt werden soll.
+            </label>
+            <label index="display_type.description">Wählen Sie das Format für die Rückmeldung auf die Fragen.</label>
+            <label index="default_value_tf.description">Dieser Wert wird als Standart für diese Frage gewählt.</label>
+            <label index="default_value_yn.description">Dieser Wert wird als Standart für diese Frage gewählt.</label>
+            <label index="default_value_txt.description">Der Wert der unterhalb eingeben wird, wird als Standart für
+                diese Frage angezeigt.
+            </label>
+            <label index="default_date.description">Das Datum das unterhalb eingeben wird, wird der Standart Wert. Das
+                Datum hat folgendes Format dd-mm-yyyy
+            </label>
+            <label index="default_value_num.description">Der Wert der unterhalb eingegeben wird, wird als Standart für
+                diese Frage angezeigt.
+            </label>
+            <label index="beginning_number.description">Geben Sie den Startwert für die Bewertungsskala ein.</label>
+            <label index="ending_number.description">Geben Sie den Endwert für die Bewertungsskala ein.</label>
+            <label index="total_number.description">Geben Sie die Summe ein die der Wert aufaddiert haben muss. Um jede
+                Summe zu erlauben, lassen Sie das Feld frei
+            </label>
+            <label index="minimum_date.description">Geben Sie das frühst mögliche Datum ein. Das Datum hat folgendes
+                Format dd-mm-yyyy
+            </label>
+            <label index="maximum_date.description">Geben Sie das letzte mögliche Datum ein. Das Datum hat folgendes
+                Format dd-mm-yyyy
+            </label>
+            <label index="minimum_value.description">Geben Sie den kleinsten möglichen nummerischen Wert ein.</label>
+            <label index="maximum_value.description">Geben Sie den größten möglichen nummerischen Wert ein.</label>
+            <label index="maximum_length.description">Geben Sie die maximal mögliche Anzahl an Zeichen ein.</label>
+            <label index="image.description">Hier können Sie ein Bild festlegen, das in der Umfrage angezeigt wird.
+            </label>
+            <label index="image_height.description">Um den Wert für die Bildhöhe zu ändern, geben Sie den Wert unterhalb
+                ein.
+            </label>
+            <label index="image_width.description">Um den Wert für die Bildbreite zu ändern, geben Sie den Wert
+                unterhalb ein.
+            </label>
+            <label index="image_alignment.description">Wählen Sie die Ausrichtung in der das Bild horizontale angezeigt
+                werden soll.
+            </label>
+            <label index="sql.description">Die SQL Anweisung muss zwei Spaltenbezeichnungen als ItemValue und
+                ItemDisplay enthalten.
+            </label>
+            <label index="email.description">Wählen Sie diese Option aus, wenn die Antwort auf diese Frage eine gültige
+                E-Mail Adresse enthalten muss.
+            </label>
+            <label index="heading.description">Geben Sie den text für die Überschrift ein.</label>
+            <label index="html.description">Nutzen Sie dieses Feld um beliebiges HTML und/oder Inhalt einzugeben. Zum
+                anzeigen von Text werden die von Ihnen eingegebenen HTML Tags verwendet.
+            </label>
+            <label index="message.description">Geben Sie denn Text für die Nachricht ein.</label>
+            <label index="page_title.description">Geben Sie einen otionalen Seitentitel ein.</label>
+            <label index="page_introduction.description">Geben Sie eine optionale Seiten Einleitung ein.</label>
+            <label index="conditions.description">Klicken Sie auf das &quot;Wizard&quot;-Icon um Bedingungen
+                einzugeben.
+            </label>
+            <label index="conditions.details">Seiten Bedingungen in der selben Gruppe werden zusammen mit einem UND
+                Operator ausgewertet. Jede Gruppe wird gegenüber anderen Gruppen mit einem ODER Operator ausgewertet. Um
+                alle Seitenbedingungen auszuwerten, benutzen Sie eine einzelne Gruppe.
+                Legen Sie eine Seitenbedingung an indem Sie eine Frage von einer vorherigen Seite auswählen und dann im
+                Wizardformular den operator und die Antwort festlegen.
+                Beachten Sie das für den Verfügbar und den Nicht Verfügbar Operator keine Antwort benötigt wird.
+            </label>
+        </languageKey>
+    </data>
+</T3locallangExt>

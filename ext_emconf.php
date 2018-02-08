@@ -1,20 +1,22 @@
 <?php
-$EM_CONF['pbsurvey'] = [
-    'title' => 'Survey',
-    'description' => 'Take surveys from the visitors of your website. The results can be exported to a csv-file to analyze in Microsoft Excel or the statistical program SPSS or it\'s open source concurrent PSPP.',
-    'category' => 'fe',
-    'state' => 'stable',
-    'author' => 'Patrick Broens',
-    'author_email' => 'patrick@patrickbroens.nl',
+
+$EM_CONF['pbsurvey'] = array(
+    'title' => 'Questionaire',
+    'description' => 'Questionaire is an extension to take surveys from the visitors of your website. The results can be exported to a csv-file to analyze in Microsoft Excel or the statistical program SPSS or it\'s open source concurrent PSPP.',
+    'category' => 'plugin',
     'version' => '2.0.0',
-    'constraints' => [
-        'depends' => [
-            'typo3' => '7.6.0-7.6.99'
-        ],
-        'conflicts' => [],
-        'suggests' => []
-    ],
-    'autoload' => [
-        'psr-4' => ['PatrickBroens\\Pbsurvey\\' => 'Classes']
-    ]
-];
+    'module' => 'wizard,wizard2,mod1',
+    'state' => 'stable',
+    'uploadfolder' => 1,
+    'author' => 'Nicolas ZERR, Patrick Broens',
+    'author_email' => 'zerr@stratis.fr,patrick@patrickbroens.nl',
+    'author_company' => 'Stratis',
+    'constraints' => array(
+        'depends' => array(
+            'php' => '5.2.0-5.6.99',
+            'typo3' => '6.0.0-7.6.99',
+        ),
+        'conflicts' => array(),
+        'suggests' => array(),
+    )
+);

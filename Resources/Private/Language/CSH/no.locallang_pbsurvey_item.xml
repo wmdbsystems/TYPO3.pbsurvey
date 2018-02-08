@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+    <data type="array">
+        <languageKey index="no" type="array">
+            <label index=".description">System for spørreundersøkelser i TYPO3.</label>
+            <label index=".details">Legg til spørsmål, sideskift, vilkår og presentasjonselement til
+                spørreundesøkelsen.
+            </label>
+            <label index="_.seeAlso">tx_pbsurvey_results</label>
+            <label index="hidden.description">Skjul element fra å bli vist i spørreundersøkelsen.</label>
+            <label index="hidden.details">Sette denne verdien er praktisk når undersøkelsen testes. Ikke endre denne
+                verdien i en undersøkelse som alt er online. Det vil påvirke påliteligheten til resultatene.
+            </label>
+            <label index="question_type.description">Velg fra mer enn 20 spørsmålstyper, inkludert matriser, rangering,
+                nedtrekkslister, åpne spørsmål, avkrysningsbokser og mere.
+            </label>
+            <label index="question_type.details"></label>
+            <label index="question.description">Bruk dette feltet for å skrive inn spørmål eller melding.</label>
+            <label index="question.details"></label>
+            <label index="question_alias.description">Skriv inn alternativ teskt for bruk i rapporter. Dersom blank, vil
+                det aktuelle spørsmålet bli vist.
+            </label>
+            <label index="question_subtext.description">Skriv inn informasjon eller tilleggstekst som vises under
+                spørsmålet.
+            </label>
+            <label index="options_required.description">Kryss av her dersom det er obligatorisk å svare på spørsmålet.
+            </label>
+            <label index="options_random.description">Kryss av her dersom spørsmålene skal vises i tilfeldig
+                rekkefølge.
+            </label>
+            <label index="options_alignment.description">Velg måten svarene skal justeres på siden.</label>
+            <label index="options_minimum_responses.description">Skriv inn minste antall alternativer som må svares
+                på.
+            </label>
+            <label index="options_maximum_responses.description">Skriv inn maksimalt antall alternativer som må svares
+                på.
+            </label>
+            <label index="options_row_heading_width.description">Skriv inn bredde på rekketittel, i piksler.</label>
+            <label index="rows.description">Skriv inn hvert rekkenavn på ny linje i boksen under.</label>
+            <label index="answers.description">Skriv inn hvert av svarene på ny linje i boksen under. Klikk på &quot;veiviser&quot;-knappen
+                for flere valg
+            </label>
+            <label index="answers_allow_additional.description">Kryss av her dersom du vil ha tillegg &quot;annet&quot;
+                svar som mulighet for respondentene.
+            </label>
+            <label index="answers_text_additional.description">Du kan endre teksten for &quot;annet&quot; i teksboksen
+                under.
+            </label>
+            <label index="answers_type_additional.description">Velg type som skal brukes for tilleggssvaret.</label>
+            <label index="display_type.description">Velg format for svar på spørsmålet.</label>
+            <label index="default_value_tf.description">Denne verdien vil bli valgt som standardsvar for spørsmålet.
+            </label>
+            <label index="default_value_yn.description">Denne verdien vil bli valgt som standardsvar for spørsmålet..
+            </label>
+            <label index="default_value_txt.description">Verdien skrevet inn nedenfor vil bli vist som standardsvar for
+                dette spørmålet.
+            </label>
+            <label index="default_date.description">Datone skrevet inn nedenfor will ble standardverdi. Datoformat er
+                dd-mm-åååå.
+            </label>
+            <label index="default_value_num.description">Verdien skrevet inn nedenfor vil bli vist som standardsvar for
+                dette spørmålet.
+            </label>
+            <label index="beginning_number.description">Skriv inn første verdi for rangeringskala.</label>
+            <label index="ending_number.description">Skriv inn siste verdi for rangeringskala.</label>
+            <label index="total_number.description">Skriv inn totalsummen verdiene må summeres til. For å tillate enhver
+                sum, la feltet være blankt.
+            </label>
+            <label index="minimum_date.description">Skriv inn tidligste aksepterbare dato. Datoformat er dd-mm-åååå.
+            </label>
+            <label index="maximum_date.description">Skriv inn seneste aksepterbare dato. Datoformat er dd-mm-åååå.
+            </label>
+            <label index="minimum_value.description">Skriv inn minste aksepterbare tallverdi.</label>
+            <label index="maximum_value.description">Skriv inn største aksepterbare tallverdi.</label>
+            <label index="maximum_length.description">Skriv inn maksimalt antall tegn tillatt for dette spørsmålet.
+            </label>
+            <label index="image.description">Her kan du legge til et bilde som blir vist i spørreundersøkelsen.</label>
+            <label index="image_height.description">For å endre høyden på bildet, skriv inn en verdi nedenfor
+                (piksler).
+            </label>
+            <label index="image_width.description">For å endre bredden på bildet, skriv inn en verdi nedenfor
+                (piksler).
+            </label>
+            <label index="image_alignment.description">Velg vannrett justering for hvordan bildet skal vises..</label>
+            <label index="sql.description">SQL må inneholde to kolonner med aliaset ItemValue og ItemDisplay.</label>
+            <label index="email.description">Kryss av her dersom svaret på dette spørmålet må være en gyldig
+                epostadresse.
+            </label>
+            <label index="heading.description">Skriv inn tekst for tittel.</label>
+            <label index="html.description">Bruk dette feltet til å skrive inn HTML og/eller innhold. Teksten vil vises
+                med bruk av eventuelle HTML-koder.
+            </label>
+            <label index="message.description">Skriv inn tekst for meldingen.</label>
+            <label index="page_title.description">Skriv inn alternativ sidetittel.</label>
+            <label index="page_introduction.description">Skriv inn en alternativ sideintroduksjon.</label>
+            <label index="conditions.description">Klikk på &quot;veiviser&quot;knappen for å skrive inn vilkår.</label>
+            <label index="conditions.details">Sidevilkår i samme gruppe vurderes sammen med OG betingelser. Hver gruppe
+                er vurdert sammen med andre grupper med ELLER betingelser. For å vurdere alle sidevilkår, bruk en
+                gruppe.
+
+                Lag sidevilkår ved å velge et spørsmål fra tidligere sider, og deretter spesifisere betingelser og swar
+                i veiviseren. Merk at forutsatt at eller ikke forutsatt at betingelsene ikke krever svar.
+            </label>
+        </languageKey>
+    </data>
+</T3locallangExt>

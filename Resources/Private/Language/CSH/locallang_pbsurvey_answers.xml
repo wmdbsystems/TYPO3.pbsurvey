@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Questionaire answers.</description>
+        <type>CSH</type>
+        <csh_table>tx_pbsurvey_answers</csh_table>
+        <fileId>EXT:pbsurvey/Resources/Private/Language/CSH/locallang_pbsurvey_answers.xml</fileId>
+        <ext_filename_template>
+            EXT:pbsurvey/Resources/Private/Language/CSH/###LANGKEY###.locallang_pbsurvey_answers.xml
+        </ext_filename_template>
+        <labelContext type="array">
+        </labelContext>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index=".description">Questionaire answers.</label>
+            <label index=".details">This is the table containing all answer records. Each answer has its own record and
+                has a relation to a result record.
+            </label>
+            <label index="hidden.description">Use this to temporarily exclude this answer from display and export to csv
+                file with the module Web &gt; Questionaire.
+            </label>
+            <label index="hidden.details">Setting this option is practical when exporting the results to a csv file. You
+                can, for instance, exclude this answer that was meant for testing purposes only.
+            </label>
+            <label index="result.description">The parent result record this answer belongs to.</label>
+            <label index="result.details">Do not change this field if you want reliable results from the questionaire.
+                Changing this field will exclude the answer from being exported to a csv file if the results do not
+                match the ones of the questionaire that generated this answer.
+            </label>
+            <label index="_result.seeAlso">tx_pbsurvey_results</label>
+            <label index="question.description">The question this answer belongs to.</label>
+            <label index="question.details">Each answer belongs to a question. Multiple answers can be given to one
+                question, which is subject to the type of question. The value in this field is the question where this
+                answer belongs to.
+            </label>
+            <label index="_fe_user.seeAlso">tx_pbsurvey_item, fe_users</label>
+            <label index="row.description">Row identifier.</label>
+            <label index="row.details">This identifier is used by the Web &gt; Questionaire module to calculate
+                statistics and proper export results.
+            </label>
+            <label index="col.description">Column identifier.</label>
+            <label index="col.details">This identifier is used by the Web &gt; Questionaire module to calculate
+                statistics and proper export results.
+            </label>
+            <label index="answer.description">A single answer to a question.</label>
+            <label index="answer.details">This field represents a single answer given by the user to a question. It is
+                however possible this field is empty. In that case the answer will be calculated by the fields 'Row' and
+                'Column'.
+            </label>
+        </languageKey>
+    </data>
+    <orig_hash type="array">
+    </orig_hash>
+    <orig_text type="array">
+    </orig_text>
+</T3locallang>

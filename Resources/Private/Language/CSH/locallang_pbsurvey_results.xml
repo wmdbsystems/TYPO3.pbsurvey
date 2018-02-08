@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Questionaire results.</description>
+        <type>CSH</type>
+        <csh_table>tx_pbsurvey_results</csh_table>
+        <fileId>EXT:pbsurvey/Resources/Private/Language/CSH/locallang_pbsurvey_results.xml</fileId>
+        <ext_filename_template>
+            EXT:pbsurvey/Resources/Private/Language/CSH/###LANGKEY###.locallang_pbsurvey_results.xml
+        </ext_filename_template>
+        <labelContext type="array">
+        </labelContext>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index=".description">Questionaire results.</label>
+            <label index=".details">Contains all results from the questionaire, even if they are not finished.</label>
+            <label index="_.seeAlso">tx_pbsurvey_item</label>
+            <label index="hidden.description">Use this to temporarily exclude this result from display and export to csv
+                file with the module Web &gt; Questionaire.
+            </label>
+            <label index="hidden.details">Setting this option is practical when exporting the results to a csv file. You
+                can, for instance, exclude this result that was meant for testing purposes only.
+            </label>
+            <label index="user.description">The name of the frontend user who participated in the questionaire.</label>
+            <label index="user.details">When a questionaire has been taken among logged-in frontend users, the user who
+                participated will be displayed here.
+
+                When a questionaire has been taken anonymously, this field will be empty.
+
+                This field will be used by the module &quot;Web &gt; Questionaire&quot; to extract the users personal
+                information from the table &quot;fe_users&quot; and insert this information in the csv file.
+            </label>
+            <label index="_user.seeAlso">fe_users</label>
+            <label index="ip.description">The IP Address where the user was located when doing this survey.</label>
+            <label index="ip.details">The IP Address can be used for demographic information. In some cases it is used
+                by Questionaire to compare access rights of the survey.
+            </label>
+            <label index="finished.description">Checked if the user finished the survey.</label>
+            <label index="finished.details">The result record is always made in the beginning of a survey, when the user
+                sends the form of the first page back to the website. At the end of the survey this flag will be
+                checked. This flag is important to make a difference between finished and unfinished surveys when
+                exporting the results or generating backend statistics.
+            </label>
+            <label index="begintstamp.description">The start date and time of this result.</label>
+            <label index="begintstamp.details">At the beginning of a survey the start time and date is written to the
+                result record. At the end the end date and time is written to the record. With these two values you can
+                determine how long it took for users to participate in the survey.
+
+                &lt;strong&gt;Note:&lt;/strong&gt; When the survey is updatable it is possible there is a strange
+                difference between the start and end time. The start date can be later then the end date. This is
+                because a user updated his own answers but didn't finish the update session.
+            </label>
+            <label index="endtstamp.description">The end date and time of this result.</label>
+            <label index="endtstamp.details">At the end of a survey the end time and date is written to the result
+                record. At the beginning the start date and time is written to the record. With these two values you can
+                determine how long it took for users to participate in the survey.
+
+                &lt;strong&gt;Note:&lt;/strong&gt; When the survey is updatable it is possible there is a strange
+                difference between the start and end time. The start date can be later then the end date. This is
+                because a user updated his own answers but didn't finish the update session.
+            </label>
+            <label index="language_uid.description">The website language the user was seeing when entering this
+                result.
+            </label>
+            <label index="language_uid.details">Short notation of the website language in which the user was filling the
+                survey. This notation is taken from the Typoscript configuration config.language.
+
+                This value is usefull when exporting and analysing the results for multilanguage surveys.
+            </label>
+        </languageKey>
+        <languageKey index="nl">EXT:pbsurvey/Resources/Private/Language/CSH/nl.locallang_pbsurvey_results.xml
+        </languageKey>
+        <languageKey index="de">EXT:pbsurvey/Resources/Private/Language/CSH/de.locallang_pbsurvey_results.xml
+        </languageKey>
+        <languageKey index="no">EXT:pbsurvey/Resources/Private/Language/CSH/no.locallang_pbsurvey_results.xml
+        </languageKey>
+    </data>
+    <orig_hash type="array">
+    </orig_hash>
+    <orig_text type="array">
+    </orig_text>
+</T3locallang>

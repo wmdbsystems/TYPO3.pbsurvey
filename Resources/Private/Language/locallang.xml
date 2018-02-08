@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Language labels of Questionaire Flexform</description>
+        <type>module</type>
+        <fileId>EXT:pbsurvey/Resources/Private/Language/locallang.xml</fileId>
+        <labelContext type="array">
+        </labelContext>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index="pi1_title_pbsurvey">Questionaire</label>
+            <label index="pi1_plus_wiz_description_pbsurvey">Collect information from visitors using extensive
+                surveys.
+            </label>
+            <label index="pi_flexform.sheet_general">General</label>
+            <label index="pi_flexform.template_file">Template file</label>
+            <label index="pi_flexform.sheet_access">Access</label>
+            <label index="pi_flexform.access_level">Respondent Access Level</label>
+            <label index="pi_flexform.access_level0">Multiple Response</label>
+            <label index="pi_flexform.access_level1">Single Response</label>
+            <label index="pi_flexform.access_level2">Single Response (Not Updateable)</label>
+            <label index="pi_flexform.access_level3">Single Response (Not Updateable after finish)</label>
+            <label index="pi_flexform.entering_stage">Begin stage when restarting</label>
+            <label index="pi_flexform.entering_stage0">At the beginning of the survey</label>
+            <label index="pi_flexform.entering_stage1">At the point where user left the survey</label>
+            <label index="pi_flexform.anonymous_mode">Anonymous check</label>
+            <label index="pi_flexform.anonymous_mode0">IP-address</label>
+            <label index="pi_flexform.anonymous_mode1">Cookie</label>
+            <label index="pi_flexform.cookie_lifetime">Cookie lifetime (in days)</label>
+            <label index="pi_flexform.sheet_completion">Completion</label>
+            <label index="pi_flexform.completion_action">Completion Action</label>
+            <label index="pi_flexform.action0">Close the browser</label>
+            <label index="pi_flexform.action1">Display Message</label>
+            <label index="pi_flexform.action2">Redirect to another page</label>
+            <label index="pi_flexform.action3">Redirect to scoring pages</label>
+            <label index="pi_flexform.captcha_page">Show Captcha before entering survey</label>
+            <label index="pi_flexform.completion_message">Completion Message</label>
+            <label index="pi_flexform.completion_url">Completion Page</label>
+            <label index="pi_flexform.close_button">Close Button</label>
+            <label index="pi_flexform.continue_button">Continue Button</label>
+            <label index="pi_flexform.view_reports_button">View reports Button</label>
+            <label index="pi_flexform.sheet_navigation">Navigation</label>
+            <label index="pi_flexform.navigation_back">Back Button</label>
+            <label index="pi_flexform.back0">Do not display</label>
+            <label index="pi_flexform.back1">Display</label>
+            <label index="pi_flexform.navigation_cancel">Cancel Button</label>
+            <label index="pi_flexform.cancel0">Do not display</label>
+            <label index="pi_flexform.cancel1">Close browser</label>
+            <label index="pi_flexform.cancel2">Redirect to end of questionaire</label>
+            <label index="pi_flexform.cancel3">Redirect to custom page (entered below)</label>
+            <label index="pi_flexform.cancel_url">Cancel Button Page</label>
+            <label index="pi_flexform.sheet_numbering">Numbering</label>
+            <label index="pi_flexform.page_numbering">Page Numbering</label>
+            <label index="pi_flexform.page_numbering0">Do not display page numbers</label>
+            <label index="pi_flexform.page_numbering1">Display progress as a progress bar</label>
+            <label index="pi_flexform.page_numbering2">Display progress in 'Page X of Y' format</label>
+            <label index="pi_flexform.page_numbering3">Display page number on each page</label>
+            <label index="pi_flexform.question_numbering">Question Numbering</label>
+            <label index="pi_flexform.question_numbering0">Do not display question numbers</label>
+            <label index="pi_flexform.question_numbering1">Number questions within entire questionaire</label>
+            <label index="pi_flexform.question_numbering2">Number questions within each page</label>
+            <label index="pi_flexform.sheet_scoring">Scoring</label>
+            <label index="pi_flexform.score_page">Scoring page</label>
+            <label index="pi_flexform.score_max">Maximum score</label>
+            <label index="pi_flexform.score_url">Redirect to page</label>
+            <label index="pi_flexform.other">Other</label>
+            <label index="pi_flexform.maximum_responses">Maximum Responses</label>
+            <label index="pi_flexform.responses_per_user">Responses per user</label>
+            <label index="pi_flexform.days_for_update">Days for Update</label>
+            <label index="pi_flexform.validation">Form validation</label>
+            <label index="pi_flexform.validation0">Client-side Javascript</label>
+            <label index="pi_flexform.validation1">Server-side PHP (Accessibility)</label>
+            <label index="pi_flexform.validation2">Both Server-side and Client-side</label>
+            <label index="pi_flexform.menu.mail">Mail</label>
+            <label index="pi_flexform.email">Send mail</label>
+            <label index="pi_flexform.subject">Subject</label>
+            <label index="pi_flexform.email.nomail">No mail</label>
+            <label index="pi_flexform.email.qa">Send : Question / Answer</label>
+            <label index="pi_flexform.email.message">Send : Default message</label>
+            <label index="pi_flexform.from">From: Email Address</label>
+            <label index="pi_flexform.from_name">From: Name</label>
+            <label index="pi_flexform.to">To :</label>
+            <label index="pi_flexform.cc">Cc :</label>
+            <label index="pi_flexform.message">Return message :</label>
+            <label index="pi_flexform.first_column_width">First column width for matrix questions (percentage):</label>
+        </languageKey>
+    </data>
+</T3locallang>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Frontend language labels for Questionaire</description>
+        <type>module</type>
+        <fileId>EXT:pbsurvey/pi1/locallang.xml</fileId>
+        <labelContext type="array">
+        </labelContext>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index="no_items">There are no questions available to show.</label>
+            <label index="access_single_finished">You have finished this survey.</label>
+            <label index="access_single_no_update">You have already responded to this survey. You can only do this
+                once.
+            </label>
+            <label index="access_single_update_expired">You cannot update your response anymore. The days for update
+                have expired.
+            </label>
+            <label index="access_user_maximum">You have reached the maximum number of responses to this survey</label>
+            <label index="access_survey_maximum">This survey is closed. It is not possible to respond to this survey
+                anymore
+            </label>
+            <label index="value_none">-- None --</label>
+            <label index="value_true">True</label>
+            <label index="value_false">False</label>
+            <label index="value_yes">Yes</label>
+            <label index="value_no">No</label>
+            <label index="remaining_points">remaining points</label>
+            <label index="js_errors_occurred">The following error(s) occured:</label>
+            <label index="js_required_select">Please select a value for question number %q</label>
+            <label index="js_required_enter">Please enter a value for question number %q</label>
+            <label index="js_required_enter_multiple">Please enter values for all items for question number %q</label>
+            <label index="js_required_matrix_check">Please select at least one item for question number %q</label>
+            <label index="js_required_matrix_value">Please enter a value for at least one item for question number %q
+            </label>
+            <label index="js_required_matrix_radio">Please select one item per row for question number %q</label>
+            <label index="js_required_date">Please enter a date for question number %q</label>
+            <label index="js_required_numeric">Please enter a numeric value for question number %q</label>
+            <label index="js_numeric">Please make sure that all values entered for question number %q are numeric.
+            </label>
+            <label index="js_sum">The sum of all answers for question number %q must add up to %t. The current sum is
+                %v
+            </label>
+            <label index="js_minimum_date">Please enter a date that is greater than or equal to %d for question number
+                %q
+            </label>
+            <label index="js_maximum_date">Please enter a date that is less than or equal to %d for question number %q
+            </label>
+            <label index="js_date_notvalid">Please enter date as either dd/mm/yyyy or dd-mm-yyyy for question number
+                %q
+            </label>
+            <label index="js_month_notvalid">Month must be between 1 and 12 for question number %q</label>
+            <label index="js_day_notvalid">Day must be between 1 and 31 for question number %q</label>
+            <label index="js_month_not31">Month %m does not have 31 days for question number %q!</label>
+            <label index="js_februari_notvalid">February %y does not have %d days for question number %q!</label>
+            <label index="js_minimum_responses">Please select at least %v values for question number %q</label>
+            <label index="js_maximum_responses">Please select no more than %v values for question number %q</label>
+            <label index="js_minimum_responses_enter">Please enter at least %v values for question number %q</label>
+            <label index="js_maximum_responses_enter">Please enter no more than %v values for question number %q</label>
+            <label index="js_minimum_value">Please enter a value that is greater than or equal to %v for question number
+                %q
+            </label>
+            <label index="js_maximum_value">Please enter a value that is less than or equal to %v for question number
+                %q
+            </label>
+            <label index="js_email">Please enter a valid email address for question number %q</label>
+            <label index="js_ranking">Item rankings must be between 1 and %v for question %q</label>
+            <label index="js_ranking_double">Each ranking value can be entered only once for question %q</label>
+            <label index="js_ranking_images">Each ranking option should be checked once for question %q</label>
+            <label index="comment_responses_both">Select at least ###OPTIONS_MINIMUM_RESPONSES### responses and no more
+                than ###OPTIONS_MAXIMUM_RESPONSES### responses.
+            </label>
+            <label index="comment_responses_minimum">Select at least ###OPTIONS_MINIMUM_RESPONSES### responses.</label>
+            <label index="comment_responses_maximum">Select no more than ###OPTIONS_MAXIMUM_RESPONSES### responses.
+            </label>
+            <label index="comment_sum">The sum of the numbers entered must equal ###TOTAL_NUMBER###.</label>
+            <label index="comment_date_both">The value must be between ###MINIMUM_DATE### and ###MAXIMUM_DATE###,
+                inclusive.
+            </label>
+            <label index="comment_date_minimum">The value must be greater than or equal to ###MINIMUM_DATE###.</label>
+            <label index="comment_date_maximum">The value must be less than or equal to ###MAXIMUM_DATE###.</label>
+            <label index="comment_number_both">The value must be between ###MINIMUM_VALUE### and ###MAXIMUM_VALUE###,
+                inclusive.
+            </label>
+            <label index="comment_number_minimum">The value must be greater than or equal to ###MINIMUM_VALUE###.
+            </label>
+            <label index="comment_number_maximum">The value must be less than or equal to ###MAXIMUM_VALUE###.</label>
+            <label index="comment_responses_enter_both">Enter at least ###OPTIONS_MINIMUM_RESPONSES### responses and no
+                more than ###OPTIONS_MAXIMUM_RESPONSES### responses.
+            </label>
+            <label index="comment_responses_enter_minimum">Enter at least ###OPTIONS_MINIMUM_RESPONSES### responses.
+            </label>
+            <label index="comment_responses_enter_maximum">Enter no more than ###OPTIONS_MAXIMUM_RESPONSES###
+                responses.
+            </label>
+            <label index="comment_ranking">Rank the items below, using numeric values starting with 1.</label>
+            <label index="comment_image_ranking">Rank the items below, an option can only be used once.</label>
+            <label index="submit">Submit</label>
+            <label index="back">Back</label>
+            <label index="cancel">Cancel</label>
+            <label index="username">Please enter user name:</label>
+            <label index="continue">Continue</label>
+            <label index="close">Close window</label>
+            <label index="page">Page</label>
+            <label index="page_xy">Page %x of %y</label>
+            <label index="percent">percent</label>
+            <label index="failed_saving_data">An error has occured during saving data. We are sorry.</label>
+            <label index="failed_scoring">No scoring pages are defined. There is no page to redirect to.</label>
+            <label index="completion_message">Thank you for taking the survey!</label>
+            <label index="no_script">In order to participate in this survey, Javascript support needs to be available.
+                Perhaps Javascript is switched off or your browser does not support it.
+            </label>
+        </languageKey>
+    </data>
+</T3locallang>

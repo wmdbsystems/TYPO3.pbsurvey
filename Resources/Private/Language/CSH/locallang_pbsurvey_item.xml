@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+    <meta type="array">
+        <description>Item types for Questionaire.</description>
+        <type>CSH</type>
+        <csh_table>tx_pbsurvey_item</csh_table>
+        <fileId>EXT:pbsurvey/Resources/Private/Language/CSH/locallang_pbsurvey_item.xml</fileId>
+        <ext_filename_template>EXT:pbsurvey/Resources/Private/Language/CSH/###LANGKEY###.locallang_pbsurvey_item.xml
+        </ext_filename_template>
+        <labelContext type="array">
+        </labelContext>
+    </meta>
+    <data type="array">
+        <languageKey index="default" type="array">
+            <label index=".description">Questionaire system for TYPO3.</label>
+            <label index=".details">Add questions, pagebreaks, conditions or presentation items to the questionaire.
+            </label>
+            <label index="_.seeAlso">tx_pbsurvey_results</label>
+            <label index="hidden.description">Hide item from display in the questionaire.</label>
+            <label index="hidden.details">Setting this option is practical while testing the questionaire. Do not change
+                this option in a questionaire that is already online. It will influence the reliability of the results.
+            </label>
+            <label index="sys_language_uid.description">Select the system language of this element.
+
+                &lt;strong&gt;Notice:&lt;/strong&gt; This will affect whether the element is visible.
+            </label>
+            <label index="sys_language_uid.details">This allows you to assign a specific language to the question type.
+                If you select anything but the &quot;All&quot; value, the element will not be visible unless the
+                language assigned is also configured by the TypoScript template.
+                The available system languages are created by the administrator..
+
+                &lt;strong&gt;Note:&lt;/strong&gt; To get reliable results of a multiple language survey, you must
+                translate all items in this survey.
+            </label>
+            <label index="question_type.description">Choose from over 20 item types, including four kinds of matrix
+                questions, ranking questions, drop-down lists, open-ended text boxes, checkboxes, and more.
+            </label>
+            <label index="question_type.details"></label>
+            <label index="question.description">Use this field to enter the text for your question or input prompt.
+            </label>
+            <label index="question.details"></label>
+            <label index="question_alias.description">Enter alternate text for use in the reports. If blank, the actual
+                question will be displayed.
+            </label>
+            <label index="question_subtext.description">Enter informational or additional text to display below the
+                question.
+            </label>
+            <label index="options_required.description">Check this box if an answer to this question is required.
+            </label>
+            <label index="options_random.description">Check this box if the answers to this question should be displayed
+                in random order.
+            </label>
+            <label index="options_alignment.description">Select the way answers should be aligned on the page.</label>
+            <label index="options_minimum_responses.description">Enter the minimum number of fields that must be
+                answered.
+            </label>
+            <label index="options_maximum_responses.description">Enter the maximum number of fields that can be
+                answered.
+            </label>
+            <label index="options_row_heading_width.description">Enter the width, in pixels, of the column for the row
+                headings.
+            </label>
+            <label index="rows.description">Enter each row name on a separate line below.</label>
+            <label index="answers.description">The textbox below will show the answers each on a new line. Click the
+                &quot;wizard&quot;-button to enter new answers and its options.
+            </label>
+            <label index="answers_allow_additional.description">Check this box if you would like an additional &quot;Other&quot;
+                answer to allow questionaire takers to give a different answer.
+            </label>
+            <label index="answers_text_additional.description">You may edit the text of the &quot;Other&quot; prompt in
+                the text box below.
+            </label>
+            <label index="answers_type_additional.description">Select the type of control that should be used to for the
+                additional answer.
+            </label>
+            <label index="textarea_width.description">Defines the width (cols) for the additional textarea.</label>
+            <label index="textarea_height.description">Defines the height (rows) for the additional textarea.</label>
+            <label index="display_type.description">Select the format for the response to the question.</label>
+            <label index="default_value_tf.description">This value will be selected as the default for this question.
+            </label>
+            <label index="default_value_yn.description">This value will be selected as the default for this question.
+            </label>
+            <label index="negative_first.description">When checked the negative value (false/no) will be first in order
+                of the answer list.
+            </label>
+            <label index="default_value_txt.description">The value entered below will be displayed as the default for
+                this question.
+            </label>
+            <label index="default_date.description">The date entered below will be the default value. Format for the
+                date is dd-mm-yyyy.
+            </label>
+            <label index="default_value_num.description">The value entered below will be displayed as the default for
+                this question.
+            </label>
+            <label index="beginning_number.description">Enter the first number for the rating scale.</label>
+            <label index="ending_number.description">Enter the last number for the rating scale.</label>
+            <label index="total_number.description">Enter the total that the value must add up to. To allow any total,
+                leave this field blank.
+            </label>
+            <label index="minimum_date.description">Enter the earliest acceptable date. Format for the date is
+                dd-mm-yyyy.
+            </label>
+            <label index="maximum_date.description">Enter the latest acceptable date. Format for the date is
+                dd-mm-yyyy.
+            </label>
+            <label index="minimum_value.description">Enter the smallest acceptable numeric value.</label>
+            <label index="maximum_value.description">Enter the largest acceptable numeric value.</label>
+            <label index="maximum_length.description">Enter the maximum number of allowable characters for this
+                question.
+            </label>
+            <label index="image.description">Here you can assign an image that will be shown in the questionaire.
+            </label>
+            <label index="image_height.description">To change the height of the image, enter a value below.</label>
+            <label index="image_width.description">To change the width of the image, enter a value below.</label>
+            <label index="image_alignment.description">Select the horizontal alignment for how the image should be
+                displayed.
+            </label>
+            <label index="sql.description">The SQL must contain two columns aliased as ItemValue and ItemDisplay.
+            </label>
+            <label index="email.description">Check this box if the answer to this question must be a valid email
+                address.
+            </label>
+            <label index="heading.description">Enter the text for the heading.</label>
+            <label index="html.description">Use this field to enter any HTML and/or content. Text will be displayed
+                using the HTML tags you enter.
+            </label>
+            <label index="message.description">Enter the text for the message.</label>
+            <label index="styleclass.description">Enter a CSS classname to add to the fieldset of this item.</label>
+            <label index="page_title.description">Enter a optional page title.</label>
+            <label index="page_introduction.description">Enter an optional page introduction.</label>
+            <label index="conditions.description">Click the &quot;Wizard&quot; button to enter conditions.</label>
+            <label index="conditions.details">Page conditions in the same group are evaluated together with an AND
+                operator. Each group is evaluated with other groups using an OR operator. To evaluate all page
+                conditions, use a single group.
+
+                Create a page condition by selecting a question from a prior page, and then specifying the operator and
+                answer in the wizardform. Note that the Provided and Did Not Provide operators do not require an answer.
+            </label>
+        </languageKey>
+        <languageKey index="nl">EXT:pbsurvey/Resources/Private/Language/CSH/nl.locallang_pbsurvey_item.xml</languageKey>
+        <languageKey index="de">EXT:pbsurvey/Resources/Private/Language/CSH/de.locallang_pbsurvey_item.xml</languageKey>
+        <languageKey index="no">EXT:pbsurvey/Resources/Private/Language/CSH/no.locallang_pbsurvey_item.xml</languageKey>
+    </data>
+    <orig_hash type="array">
+    </orig_hash>
+    <orig_text type="array">
+    </orig_text>
+</T3locallang>

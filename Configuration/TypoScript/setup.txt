@@ -1,0 +1,39 @@
+plugin.tx_pbsurvey_pi1 {
+	templateFile = {$plugin.tx_pbsurvey_pi1.templateFile}
+	pid = {$plugin.tx_pbsurvey_pi1.pid}
+	accessLevel = {$plugin.tx_pbsurvey_pi1.accessLevel}
+
+	maximumResponses = {$plugin.tx_pbsurvey_pi1.maximumResponses}
+	userResponses = {$plugin.tx_pbsurvey_pi1.userResponses}
+	daysForUpdate = {$plugin.tx_pbsurvey_pi1.daysForUpdate}
+	validation = {$plugin.tx_pbsurvey_pi1.validation}
+
+	anonymous {
+		mode = {$plugin.tx_pbsurvey_pi1.anonymous.mode}
+		cookie_lifetime = {$plugin.tx_pbsurvey_pi1.anonymous.cookie_lifetime}
+	}
+
+	security {
+		captcha = {$plugin.tx_pbsurvey_pi1.security.captcha}
+	}
+
+	completion {
+		action = {$plugin.tx_pbsurvey_pi1.completion.action}
+		redirectPid = {$plugin.tx_pbsurvey_pi1.completion.redirectPid}
+		button {
+			close = {$plugin.tx_pbsurvey_pi1.completion.button.close}
+			continue = {$plugin.tx_pbsurvey_pi1.completion.button.continue}
+		}
+	}
+
+	navigation {
+		back = {$plugin.tx_pbsurvey_pi1.navigation.back}
+		cancel = {$plugin.tx_pbsurvey_pi1.navigation.cancel}
+		cancelPid = {$plugin.tx_pbsurvey_pi1.navigation.cancelPid}
+	}
+
+	numbering {
+		page = {$plugin.tx_pbsurvey_pi1.numbering.page}
+		question = {$plugin.tx_pbsurvey_pi1.numbering.question}
+	}
+}

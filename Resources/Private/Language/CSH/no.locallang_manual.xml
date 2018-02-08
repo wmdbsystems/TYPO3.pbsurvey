@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallangExt>
+    <data type="array">
+        <languageKey index="no" type="array">
+            <label index=".alttitle">Spørreundersøkelse</label>
+            <label index=".description">System for spørreundersøkelser i TYPO3.</label>
+            <label index=".details">Spørreundersøkelse er en tilleggsmodul for å gjennomføre undersøkelser blant
+                besøkende på din nettside. Resultatene kan eksporteres til en csv-fil for analyse i Microsoft
+                Excel/OpenOffice Calc eller statistikkprogrammene SPSS eller PSPP (siste er åpen kildekode).
+            </label>
+            <label index="_.image"></label>
+            <label index=".image_descr"></label>
+            <label index=".syntax"></label>
+            <label index=".seeAlso"></label>
+            <label index="features.alttitle">Funksjonalitet</label>
+            <label index="features.description">16 ulike spørmåls- og presentasjonselemsnt, inklusive 7 åpne spørmål, 4
+                ulike matriser, og 5 valgtyper
+                Besøkende kan svare på undersøkelsen anonymnt eller som innlogga nettstedbruker.
+                Maksimalt antall svar pr innlogga bruker.
+                Valgfri oppdatering av svar av respondenten.
+                Ulike handlinger etter undersøkelsen er fullført, som vise medling eller lukke nettleser.
+                Valgfri avbryt og/eller tilbake knapp.
+                Flere valg dersom en bruker avbryter en undersøkelse.
+                Valg for nummerering av sider og spørsmål.
+                Mulig å legge inn standarsvar på hvert spørmål.
+                Gjøre spørmål obligatorisk å svare på.
+                Sideskift (flerside undersøkelse).
+                Skjul eller vis sider for respondenten avhengig av vilkår/betingelser.
+                Feilsjekk på enkelte svar.
+                2 format for eksport av dataformat.
+                Design ved hjelp av mal eller CSS.
+                Konfigureres med FlexForm eller TypoScript.
+                XHTML-strict sidekode.
+            </label>
+            <label index="tutorial.alttitle">Veiledning</label>
+            <label index="tutorial.description">I denne veiledningen vil du lære hvordan lage en spørreundersøkelse på
+                ditt nettsted. Spørreundersøkelsen i denne veiledning vil være anonym. Besøkende trenger ikke å
+                registrere seg eller logge seg inn. Besøkende kan legge inn så mange svar de vil. Du bør ha
+                basiskunnskaper i TYPO3. Standard malfil vil bli brukt.
+            </label>
+            <label index="step1.alttitle">Veiledning - steg 1</label>
+            <label index="step1.description">Lag en ny SysMappe til å lagre spørreundersøkelser og resultat. Dette er
+                valgfritt men anbefalt. Du kan gjøre dette med å velge 'Web > Side' eller 'Web > Liste'. I eksemplet er
+                mappen gitt navnet 'Questionaire Storage'.
+            </label>
+            <label index="step2.alttitle">Veiledning - steg 2</label>
+            <label index="step2.description">Lage ny side som skal vise spørreundersøkelsen for besøkende på nettsiden.
+                I eksemplet under er denne gitt navnet 'Questionaire'.
+            </label>
+            <label index="step3.alttitle">Veiledning - steg 3</label>
+            <label index="step3.description">Gå til modulen 'Web > Side' (Brukes TV velg denne sin sidemodul). Velg
+                siden du laget i steg 2 i sidetreet. Klikk på knappen 'Lag sideinnhold'. Du får fram veiviseren for nytt
+                sideinnhold. Velg knappen 'Spørreundersøkelse' som finnes under 'Plugins'.
+            </label>
+            <label index="step3.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-1-2-3_en.png
+            </label>
+            <label index="step3.image_descr">Steg 1 - 3: Lage side og lagringsmappe. Sett inn modulen (plugin).</label>
+            <label index="step4.alttitle">Veiledning - steg 4</label>
+            <label index="step4.description">FlexForm for konfigurasjon av modulen vises. Klikk på tabben 'Standard'. På
+                'Startpunkt' klikker du på knappen til høyre for å få Elementoversikten i TYPO3. Velg SysMappen du laget
+                for å lagre spørreundersøkelsen og resultat. I eksemplet er dette en SysMappe som heter 'Questionaire
+                Storage'.
+            </label>
+            <label index="step4.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-4_en.png</label>
+            <label index="step4.image_descr">Steg 4: Velg 'startpunkt for modulen.</label>
+            <label index="step5.alttitle">Veiledning - steg 5</label>
+            <label index="step5.description">Skriv inn resten av konfigurasjonen slik du ønsker.</label>
+            <label index="step5.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-5_en.png</label>
+            <label index="step5.image_descr">Steg 5: Konfigurasjon av modulen.</label>
+            <label index="step6.alttitle">Veiledning - steg 6</label>
+            <label index="step6.description">Gå til modulen 'Web > Liste' og klikk på SysMappen for lagring av
+                spørreundersøkelsens elementer (i eksemplet 'Questionaire Storage). Klikk på knappen 'Lag nytt innhold'.
+                I 'Nytt innhold veiviser' klikk på 'Spørreundersøkelseselement'.
+            </label>
+            <label index="step6.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-6_en.png</label>
+            <label index="step6.image_descr">Steg 6: Lag nytt spørreundersøkelseselement.</label>
+            <label index="step7.alttitle">Veiledning - steg 7</label>
+            <label index="step7.description">Velg en 'spørsmålstype' i nedtrekkslista. Skjemaet vil tilpasse seg
+                typen.
+            </label>
+            <label index="step8.alttitle">Veiledning - steg 8</label>
+            <label index="step8.description">Skriv inn nødvendige verdier i de ulike feltene slik du ønsker å fremstille
+                spørsmålet.
+            </label>
+            <label index="step9.alttitle">Veiledning - steg 9</label>
+            <label index="step9.description">Svaralternativer kan skrives inn i flete 'Svaralternativer'. Dersom du
+                ønsker å angi flere valg for hvert spørmål, klikk på 'svarveiviser' til høyre for dette feltet.
+            </label>
+            <label index="step10.alttitle">Veiledning - steg 10</label>
+            <label index="step10.description">Lagre elementet og lukk. Gjenta steg 7 til 10 for å legge til flere
+                element.
+            </label>
+            <label index="step10.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-7-8-9-10_en.png
+            </label>
+            <label index="step10.image_descr">Steg 7 - 10: Legge til spørmål/element.</label>
+            <label index="step11.alttitle">Veiledning - steg 11</label>
+            <label index="step11.description">Du er tilabek i modulen 'Web > Liste'. En oversikt over alle spørmålene
+                presenteres.
+            </label>
+            <label index="step11.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-11_en.png</label>
+            <label index="step11.image_descr">Steg 11: Oversikt over alle spørsmålene.</label>
+            <label index="step12.alttitle">Veiledning - steg 12</label>
+            <label index="step12.description">Kontroller om spørsmålene kommer korrekt fram ved å sjekke dette i fronted
+                på TYPO3. Dersom du ønsker å gjøre modifikasjoner, kan du gjøre dette i backend.
+            </label>
+            <label index="step12.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-12_en.png</label>
+            <label index="step12.image_descr">Steg 12: Kontrollere spørsmålene i frontend i TYPO3.</label>
+            <label index="step13.alttitle">Veiledning - steg 13</label>
+            <label index="step13.description">Dersom alle spørsmålene er som du øsnker, kan du lage 'sideskift og
+                vilkår' elemnter i lista. I eksmpelet laget vi sideskift etter de to første spørsmålene. De første to
+                vil vises på side 1, resten på side 2.
+            </label>
+            <label index="step13.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-13_en.png</label>
+            <label index="step13.image_descr">Steg 13: Legg til et sideskift.</label>
+            <label index="step14.alttitle">Veiledning - steg 14</label>
+            <label index="step14.description">Velg 'Sideskift og vilkår' i bunnen av nedtrekkslista. Skjemaet vil
+                tilpasse seg valget. Skriv inn en sidetittel og indtroduksjonstekst.
+            </label>
+            <label index="step15.alttitle">Veiledning - steg 15</label>
+            <label index="step15.description">Vil du legge vilkår til en side, klipp på kanppen 'Vilkårsveiviser' til
+                høyre for vilkårsfeltet.
+            </label>
+            <label index="step15.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-14-15_en.png
+            </label>
+            <label index="step15.image_descr">Steg 14 and 15: Legg til et sideskift.</label>
+            <label index="step16.alttitle">Veiledning - steg 16</label>
+            <label index="step16.description">Legg til betingelser som skal sammenlignes med svar på tidligere spørmål.
+                Er betingelsen "riktig", vil siden vises. I veiledningen er 'vilkårsveiviseren' forklart for seg selv.
+            </label>
+            <label index="step16.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-16_en.png</label>
+            <label index="step16.image_descr">Steg 16: Vilkårsveiviseren (vilkår/betingelser).</label>
+            <label index="step17.alttitle">Veiledning - steg 17</label>
+            <label index="step17.description">Kontroller om betingelsene fungerer korrekt i frontend.</label>
+            <label index="step18.alttitle">Veiledning - steg 18</label>
+            <label index="step18.description">Gjør spørreundersøkelsen tilgjengelig for de besøkende på nettsiden.
+            </label>
+            <label index="step19.alttitle">Veiledning - steg 19</label>
+            <label index="step19.description">Når undersøkelsen er ferdig, kan du eksportere alle resultatene til
+                analyse i MS Excel eller statistisk programvare som SPSS. Gå til modulen 'Web > Spørreundersøkelse'.
+                Velg lagringsmappa for spørreundersøkelsens elementer og resultat i sidetreet. Modulen vil vise en
+                oversikt over hvor mange som har deltatt i undersøkelsen. Velg en eksportmetode og klikk på 'Eksport
+                CSV-fil'. Lagre filen på din lokale harddisk for videre bearbeidelse.
+            </label>
+            <label index="step19.image">EXT:pbsurvey/Resources/Private/Language/CSH/images/manual_step-19_en.png</label>
+            <label index="step19.image_descr">Steg 19: Spørreundersøkelsesmodulen.</label>
+        </languageKey>
+    </data>
+</T3locallangExt>

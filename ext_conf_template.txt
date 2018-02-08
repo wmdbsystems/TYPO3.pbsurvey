@@ -1,0 +1,11 @@
+# cat=basic/enable/130; type=boolean; label= Localization mode for text fields: By default, all text fields from a new localized survey item will be empty, otherwise they will be prepended with "[translate to ...]". If "l10n_mode_prefixLangTitle" is disabled the text "(copy [#])" will be added to the titles of this records unless "prependAtCopy" is disabled (see "prependAtCopy").
+l10n_mode_prefixLangTitle = 0
+
+# cat=basic/enable/150; type=boolean; label= Hide new localizations: Here you choose if new localizations of survey items should be hidden or not. By default new localizations are visible. If this is not wanted set "hideNewLocalizations" to 1.
+hideNewLocalizations = 0
+
+# cat=basic/enable/180; type=boolean; label= Prepend at Copy: Here you can enable adding of the text "(copy [#])" to titles of copied records.
+prependAtCopy = 0
+
+# cat=basic/enable/210; type=boolean; label= Editable answers: By default, you can only add answers with the wizard. Setting this option makes it possible to add answers directly in the text field. Very usefull when entering a lot of answers.
+answersEditable = 0
