@@ -1,65 +1,68 @@
 <?php
-/***************************************************************
-*  Copyright notice
-*
-*  (c) 2005 Patrick Broens (patrick@patrickbroens.nl)
-*  All rights reserved
-*
-*  This script is part of the TYPO3 project. The TYPO3 project is
-*  free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 2 of the License, or
-*  (at your option) any later version.
-*
-*  The GNU General Public License can be found at
-*  http://www.gnu.org/copyleft/gpl.html.
-*
-*  This script is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
 
-namespace Stratis\Pbsurvey\Wizard;
+namespace Stratis\Pbsurvey\Controller\Wizard;
 
-use \TYPO3\CMS\Backend\Utility\BackendUtility;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Backend\Controller\Wizard\AbstractWizardController;
+use TYPO3\CMS\Backend\Template\Components\ButtonBar;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Imaging\Icon;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Answers wizard for the 'pbsurvey' extension.
- * This wizard will help the user to add answers to a question,
- * put the flag on checked with radio buttons and checkboxes
- * and give points to answers for further use in statistical software.
- *
- * Class AnswersWizard
- * @package Stratis\Pbsurvey\Wizard
- */
-class AnswersWizard
+class AnswersController extends AbstractWizardController
 {
-    var $objDoc; // Document template object
-    var $strContent; // Content accumulation for the module.
+    /**
+     * @var string
+     */
+    var $content; // Content accumulation for the module.
+
+    /**
+     * @var array
+     */
     var $include_once = array(); // List of files to include.
+
+    /**
+     * @var int
+     */
     var $blnXmlStorage = 0; // If set, the string version of the content is interpreted/written as XML instead of the original linebased kind. This variable still needs binding to the wizard parameters - but support is ready!
-    var $arrWizardParameters; // Wizard parameters, coming from TCEforms linking to the wizard.
+
+    /**
+     * @var array
+     */
+    var $P; // Wizard parameters, coming from TCEforms linking to the wizard.
+
+    /**
+     * @var array
+     */
     var $arrTableParameters; // The array which is constantly submitted by the multidimensional form of this wizard.
+
+    /**
+     * @var bool
+     */
     var $blnLocalization = false; // If true, record is localization.
+
+    /**
+     * @var array
+     */
     var $arrl18n_diffsource = array(); // Answers from the default language
+
+    /**
+     * @var string
+     */
+    protected $extKey = 'tx_pbsurvey';
 
     /**
      * Constructor
      */
     public function __construct()
     {
+        parent::__construct();
         $GLOBALS['LANG']->includeLLFile('EXT:pbsurvey/Resources/Private/Language/locallang_wiz.xml');
         $GLOBALS['SOBE'] = $this;
+
+        $this->init();
     }
-    /**********************************
-     *
-     * Configuration functions
-     *
-     **********************************/
 
     /**
      * Initialization of the class
@@ -68,64 +71,101 @@ class AnswersWizard
      */
     function init()
     {
-        global $BACK_PATH;
-        $this->strExtKey = 'tx_pbsurvey';
-        $this->arrWizardParameters = GeneralUtility::_GP('P');
-        $this->arrTableParameters = GeneralUtility::_GP($this->strExtKey);
-        if (!empty($this->arrWizardParameters['params'])) {
-            $this->blnXmlStorage = $this->arrWizardParameters['params']['xmlOutput'];
+        $this->P = GeneralUtility::_GP('P');
+        $this->arrTableParameters = GeneralUtility::_GP($this->extKey);
+        if (!empty($this->P['params'])) {
+            $this->blnXmlStorage = $this->P['params']['xmlOutput'];
         }
-        $this->objDoc = GeneralUtility::makeInstance('TYPO3\\CMS\\Backend\\Template\\DocumentTemplate');
-        $this->objDoc->docType = 'xhtml_trans';
-        $this->objDoc->backPath = $BACK_PATH;
-        $this->objDoc->JScode = $this->objDoc->wrapScriptTags('
-			function jumpToUrl(URL,formEl)	{	//
-				document.location = URL;
-			}
-		');
-        list($strRequestUri) = explode('#', GeneralUtility::getIndpEnv('REQUEST_URI'));
-        $this->objDoc->form = '<form action="' . htmlspecialchars($strRequestUri) . '" method="post" name="wizardAnswers">';
     }
 
     /**
-     * Dispatch on action
+     * Injects the request object for the current request or subrequest
+     * As this controller goes only through the main() method, it is rather simple for now
      *
-     * Calls the requested action
-     *
-     * @return void
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return ResponseInterface
      */
-    public function dispatch()
+    public function mainAction(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $this->init();
-        $this->checkReference();
-        $this->answerGroup();
         $this->main();
-        $this->printContent();
+        $response->getBody()->write($this->moduleTemplate->renderContent());
+        return $response;
     }
 
-    /**********************************
+    /**
      *
-     * General functions
-     *
-     **********************************/
+     */
+    private function main()
+    {
+        $this->answerGroup();
+
+        list($strRequestUri) = explode('#', GeneralUtility::getIndpEnv('REQUEST_URI'));
+        $this->content .= '<form action="' . htmlspecialchars($strRequestUri) . '" method="post" id="AnswersController" name="wizardFrom">';
+
+        if ($this->P['table'] && $this->P['field'] && $this->P['uid']) {
+            $this->content .= '<h2>' . $this->getLanguageService()->getLL('table_title') . '</h2>';
+            $this->content .= $this->answersWizard();
+        } else {
+            $this->content .= '<h2>' . $this->getLanguageService()->getLL('table_title') . '</h2>';
+            $this->content .= '<span class="text-danger">' . $this->getLanguageService()->getLL('table_noData', 1) . '</span>';
+        }
+
+        $this->content .= '</form>';
+
+        $this->getButtons();
+        $this->moduleTemplate->setContent($this->content);
+    }
 
     /**
-     * Rendering the wizard
-     *
-     * @return    void
+     * Create the panel of buttons for submitting the form or otherwise perform operations.
      */
-    function main()
+    protected function getButtons()
     {
-        global $LANG;
-        $strOutput = $this->objDoc->startPage('Table');
-        if ($this->arrWizardParameters['table'] && $this->arrWizardParameters['field'] && $this->arrWizardParameters['uid']) {
-            $strOutput .= $this->objDoc->section($LANG->getLL('table_title'), $this->answersWizard(), 0, 1);
-        } else {
-            $strOutput .= $this->objDoc->section($LANG->getLL('table_title'),
-                '<span class="typo3-red">' . $LANG->getLL('table_noData', 1) . '</span>', 0, 1);
+        $buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
+        if ($this->P['table'] && $this->P['field'] && $this->P['uid']) {
+            // CSH
+            $cshButton = $buttonBar->makeHelpButton()
+                ->setModuleName('xMOD_csh_corebe')
+                ->setFieldName('wizard_table_wiz');
+            $buttonBar->addButton($cshButton);
+            // Close
+            $closeButton = $buttonBar->makeLinkButton()
+                ->setHref($this->P['returnUrl'])
+                ->setTitle($this->getLanguageService()->sL('LLL:EXT:lang/Resources/Private/Language/locallang_core.xlf:rm.closeDoc'))
+                ->setIcon($this->moduleTemplate->getIconFactory()->getIcon('actions-close', Icon::SIZE_SMALL));
+            $buttonBar->addButton($closeButton);
+            // Save
+            $saveButton = $buttonBar->makeInputButton()
+                ->setName('_savedok')
+                ->setValue('1')
+                ->setForm('AnswersController')
+                ->setIcon($this->moduleTemplate->getIconFactory()->getIcon('actions-document-save', Icon::SIZE_SMALL))
+                ->setTitle($this->getLanguageService()->sL('LLL:EXT:lang/Resources/Private/Language/locallang_core.xlf:rm.saveDoc'));
+            // Save & Close
+            $saveAndCloseButton = $buttonBar->makeInputButton()
+                ->setName('_saveandclosedok')
+                ->setValue('1')
+                ->setForm('AnswersController')
+                ->setTitle($this->getLanguageService()->sL('LLL:EXT:lang/Resources/Private/Language/locallang_core.xlf:rm.saveCloseDoc'))
+                ->setIcon($this->moduleTemplate->getIconFactory()->getIcon(
+                    'actions-document-save-close',
+                    Icon::SIZE_SMALL
+                ));
+            $splitButtonElement = $buttonBar->makeSplitButton()
+                ->addItem($saveButton)
+                ->addItem($saveAndCloseButton);
+
+            $buttonBar->addButton($splitButtonElement, ButtonBar::BUTTON_POSITION_LEFT, 3);
+            // Reload
+            $reloadButton = $buttonBar->makeInputButton()
+                ->setName('_refresh')
+                ->setValue('1')
+                ->setForm('AnswersController')
+                ->setTitle($this->getLanguageService()->getLL('forms_refresh'))
+                ->setIcon($this->moduleTemplate->getIconFactory()->getIcon('actions-refresh', Icon::SIZE_SMALL));
+            $buttonBar->addButton($reloadButton);
         }
-        $strOutput .= $this->objDoc->endPage();
-        $this->strContent = $strOutput;
     }
 
     /**
@@ -135,13 +175,12 @@ class AnswersWizard
      */
     function answerGroup()
     {
-        global $LANG;
         $intAnswerGroup = $this->arrTableParameters['answergroup'];
         if ($intAnswerGroup) {
             $this->arrTableParameters = array();
             ($intAnswerGroup >= 1 && $intAnswerGroup <= 16) ? $intAnswers = 5 : $intAnswers = 3;
             for ($intCount = 1; $intCount <= $intAnswers; $intCount++) {
-                $this->arrTableParameters['answer'][($intCount * 2)][2] = $LANG->getLL('answer_group_' . $intAnswerGroup . '.' . $intCount);
+                $this->arrTableParameters['answer'][($intCount * 2)][2] = $this->getLanguageService()->getLL('answer_group_' . $intAnswerGroup . '.' . $intCount);
             }
         }
     }
@@ -173,9 +212,9 @@ class AnswersWizard
             $arrOutput = $this->arrTableParameters['answer'];
         } else {    // No data submitted
             if ($this->blnXmlStorage) {
-                $arrOutput = GeneralUtility::xml2array($arrRow[$this->arrWizardParameters['field']]);
+                $arrOutput = GeneralUtility::xml2array($arrRow[$this->P['field']]);
             } else {
-                $arrOutput = $this->answersArray($arrRow[$this->arrWizardParameters['field']]);
+                $arrOutput = $this->answersArray($arrRow[$this->P['field']]);
             }
             $arrOutput = is_array($arrOutput) ? $arrOutput : array();
         }
@@ -190,7 +229,7 @@ class AnswersWizard
      */
     function answersWizard()
     {
-        $arrRecord = BackendUtility::getRecord($this->arrWizardParameters['table'], $this->arrWizardParameters['uid']);
+        $arrRecord = BackendUtility::getRecord($this->P['table'], $this->P['uid']);
         if (!in_array(intval($arrRecord['sys_language_uid']), array(-1, 0))) {
             $this->blnLocalization = true;
             $this->l18n_diffsource($arrRecord['l18n_diffsource']);
@@ -234,36 +273,6 @@ class AnswersWizard
         }
 
         return $arrOutput;
-    }
-
-    /**
-     * Output the accumulated content to screen
-     *
-     * @return    void
-     */
-    function printContent()
-    {
-        echo $this->strContent;
-    }
-
-    /**********************************
-     *
-     * Checking functions
-     *
-     **********************************/
-
-    /**
-     * Check if there is a reference to the record
-     *
-     * @return    void
-     */
-    function checkReference()
-    {
-        $arrRecord = BackendUtility::getRecord($this->arrWizardParameters['table'], $this->arrWizardParameters['uid']);
-        if (!is_array($arrRecord)) {
-            BackendUtility::typo3PrintError('Wizard Error', 'No reference to record', 0);
-            exit;
-        }
     }
 
     /**
@@ -312,14 +321,14 @@ class AnswersWizard
      */
     function checkSaveButtons()
     {
-        if ($this->arrTableParameters['savedok'] || $this->arrTableParameters['saveandclosedok']) {
-            $tce = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\DataHandling\\DataHandler');
+        if ($_POST['_savedok'] || $_POST['_saveandclosedok']) {
+            $tce = GeneralUtility::makeInstance(\TYPO3\CMS\Core\DataHandling\DataHandler::class);
             $tce->stripslashes_values = 0;
-            $arrData[$this->arrWizardParameters['table']][$this->arrWizardParameters['uid']][$this->arrWizardParameters['field']] = $this->answersString($this->arrTableParameters['answer']);
+            $arrData[$this->P['table']][$this->P['uid']][$this->P['field']] = $this->answersString($this->arrTableParameters['answer']);
             $tce->start($arrData, array());
             $tce->process_datamap();
-            if ($this->arrTableParameters['saveandclosedok']) {
-                header('Location: ' . GeneralUtility::locationHeaderUrl($this->arrWizardParameters['returnUrl']));
+            if ($_POST['_saveandclosedok']) {
+                header('Location: ' . GeneralUtility::locationHeaderUrl($this->P['returnUrl']));
                 exit;
             }
         }
@@ -359,8 +368,7 @@ class AnswersWizard
         $strOutput = $this->definedGroups();
         $strOutput .= $this->tableHeader();
         $strOutput .= $this->tableRows($arrTable);
-        $strOutput .= $this->tableFooter();
-
+        $strOutput .= '</table>';
         return $strOutput;
     }
 
@@ -371,12 +379,11 @@ class AnswersWizard
      */
     function definedGroups()
     {
-        global $LANG;
         if (!$this->blnLocalization) {
             $intGroups = 17; // 17 predefined groups available
-            $arrGroups[] = '<select name ="' . $this->strExtKey . '[answergroup]" onChange="submit();")>';
+            $arrGroups[] = '<select name ="' . $this->extKey . '[answergroup]" onChange="submit();")>';
             for ($intCounter = 0; $intCounter <= $intGroups; $intCounter++) {
-                $arrGroups[] = '<option value="' . $intCounter . '">' . $LANG->getLL('answer_group_' . $intCounter) . '</option>';
+                $arrGroups[] = '<option value="' . $intCounter . '">' . $this->getLanguageService()->getLL('answer_group_' . $intCounter) . '</option>';
             }
             $arrGroups[] = '</select>';
             $strOutput = implode(chr(10), $arrGroups);
@@ -392,22 +399,21 @@ class AnswersWizard
      */
     function tableHeader()
     {
-        global $LANG;
         if ($this->blnLocalization) {
             $strOutput = '
             			<table border="0" cellpadding="0" cellspacing="1" id="typo3-answerswizard">
 							<tr class="bgColor4">
                     			<td class="bgColor5">&nbsp;</td>
-                    			<td class="bgColor5">' . $LANG->getLL('table_answer') . '</td>
+                    			<td class="bgColor5">' . $this->getLanguageService()->getLL('table_answer') . '</td>
 							</tr>';
         } else {
             $strOutput = '
 	            <table border="0" cellpadding="0" cellspacing="1" id="typo3-answerswizard">
 					<tr class="bgColor4">
 	                    <td class="bgColor5">&nbsp;</td>
-	                    <td class="bgColor5">' . $LANG->getLL('table_answer') . '</td>
-	                    <td class="bgColor5">' . $LANG->getLL('table_points') . '</td>
-	                    <td class="bgColor5">' . $LANG->getLL('table_default') . '</td>
+	                    <td class="bgColor5">' . $this->getLanguageService()->getLL('table_answer') . '</td>
+	                    <td class="bgColor5">' . $this->getLanguageService()->getLL('table_points') . '</td>
+	                    <td class="bgColor5">' . $this->getLanguageService()->getLL('table_default') . '</td>
 					</tr>';
         }
 
@@ -448,7 +454,7 @@ class AnswersWizard
                     }
                     $strType = !$this->blnLocalization ? 'checkbox' : 'hidden';
                 }
-                $arrCols[] = '<input type="' . $strType . '"' . ($intWidth ? $this->objDoc->formWidth($intWidth) : '') . ' name="' . $this->strExtKey . '[answer][' . (($intLine + 1) * 2) . '][' . (($intCounter + 1) * 2) . ']" ' . $strContent . ' />';
+                $arrCols[] = '<input type="' . $strType . '" width="' . $intWidth . '" name="' . $this->extKey . '[answer][' . (($intLine + 1) * 2) . '][' . (($intCounter + 1) * 2) . ']" ' . $strContent . ' />';
                 $intCounter++;
             }
             if (!$this->blnLocalization) {
@@ -477,32 +483,6 @@ class AnswersWizard
     }
 
     /**
-     * Draw the footer of the wizard table
-     *
-     * @return    string        Containing the footer
-     */
-    function tableFooter()
-    {
-        global $LANG;
-        $strOutput = '
-			</table>
-			<div id="c-saveButtonPanel">
-                <input type="image" class="c-inputButton" name="' . $this->strExtKey . '[savedok]" src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-document-save.svg" width="21" height="16" ' . BackendUtility::titleAltAttrib($LANG->sL('LLL:EXT:lang/locallang_core.php:rm.saveDoc',
-                1)) . ' />
-                <input type="image" class="c-inputButton" name="' . $this->strExtKey . '[saveandclosedok]" src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-document-save-close.svg" width="21" height="16" ' . BackendUtility::titleAltAttrib($LANG->sL('LLL:EXT:lang/locallang_core.php:rm.saveCloseDoc',
-                1)) . ' />
-                <a href="#" onclick="' . htmlspecialchars('jumpToUrl(unescape(\'' . rawurlencode($this->arrWizardParameters['returnUrl']) . '\')); return false;') . '">
-                <img src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-document-close.svg" width="21" height="16" class="c-inputButton" ' . BackendUtility::titleAltAttrib($LANG->sL('LLL:EXT:lang/locallang_core.php:rm.closeDoc',
-                1)) . ' />
-                </a>
-                <input type="image" class="c-inputButton" name="_refresh" src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-refresh.svg" width="21" height="16" ' . BackendUtility::titleAltAttrib($LANG->getLL('forms_refresh',
-                1)) . ' />
-			</div>';
-
-        return $strOutput;
-    }
-
-    /**
      * Draw the Control Panel in front of every row
      *
      * @param    integer        Current line
@@ -511,31 +491,26 @@ class AnswersWizard
      */
     function controlPanel($intLine, $intRows)
     {
-        global $LANG;
         if ($intLine != 0) {
-            $arrOutput[] = '<input type="image" name="' . $this->strExtKey . '[row_up][' . (($intLine + 1) * 2) . ']" src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-move-up.svg" width="16" height="16" ' . BackendUtility::titleAltAttrib($LANG->getLL('table_up',
+            $arrOutput[] = '<input type="image" name="' . $this->extKey . '[row_up][' . (($intLine + 1) * 2) . ']" src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-move-up.svg" width="16" height="16" ' . BackendUtility::titleAltAttrib($this->getLanguageService()->getLL('table_up',
                     1)) . ' />';
         } else {
-            $arrOutput[] = '<input type="image" name="' . $this->strExtKey . '[row_bottom][' . (($intLine + 1) * 2) . ']" src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-move-to-bottom.svg" width="16" height="16" ' . BackendUtility::titleAltAttrib($LANG->getLL('table_bottom',
+            $arrOutput[] = '<input type="image" name="' . $this->extKey . '[row_bottom][' . (($intLine + 1) * 2) . ']" src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-move-to-bottom.svg" width="16" height="16" ' . BackendUtility::titleAltAttrib($this->getLanguageService()->getLL('table_bottom',
                     1)) . ' />';
         }
-        $arrOutput[] = '<input type="image" name="' . $this->strExtKey . '[row_remove][' . (($intLine + 1) * 2) . ']" src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-selection-delete.svg" width="16" height="16" ' . BackendUtility::titleAltAttrib($LANG->getLL('table_removeRow',
+        $arrOutput[] = '<input type="image" name="' . $this->extKey . '[row_remove][' . (($intLine + 1) * 2) . ']" src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-selection-delete.svg" width="16" height="16" ' . BackendUtility::titleAltAttrib($this->getLanguageService()->getLL('table_removeRow',
                 1)) . ' />';
 
         if (($intLine + 1) != $intRows) {
-            $arrOutput[] = '<input type="image" name="' . $this->strExtKey . '[row_down][' . (($intLine + 1) * 2) . ']" src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-move-down.svg" width="16" height="16" ' . BackendUtility::titleAltAttrib($LANG->getLL('table_down',
+            $arrOutput[] = '<input type="image" name="' . $this->extKey . '[row_down][' . (($intLine + 1) * 2) . ']" src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-move-down.svg" width="16" height="16" ' . BackendUtility::titleAltAttrib($this->getLanguageService()->getLL('table_down',
                     1)) . ' />';
         } else {
-            $arrOutput[] = '<input type="image" name="' . $this->strExtKey . '[row_top][' . (($intLine + 1) * 2) . ']" src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-move-to-top.svg" width="16" height="16" ' . BackendUtility::titleAltAttrib($LANG->getLL('table_top',
+            $arrOutput[] = '<input type="image" name="' . $this->extKey . '[row_top][' . (($intLine + 1) * 2) . ']" src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-move-to-top.svg" width="16" height="16" ' . BackendUtility::titleAltAttrib($this->getLanguageService()->getLL('table_top',
                     1)) . ' />';
         }
-        $arrOutput[] = '<input type="image" name="' . $this->strExtKey . '[row_add][' . (($intLine + 1) * 2) . ']" src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-edit-add.svg" width="16" height="16" ' . BackendUtility::titleAltAttrib($LANG->getLL('table_addRow',
+        $arrOutput[] = '<input type="image" name="' . $this->extKey . '[row_add][' . (($intLine + 1) * 2) . ']" src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-edit-add.svg" width="16" height="16" ' . BackendUtility::titleAltAttrib($this->getLanguageService()->getLL('table_addRow',
                 1)) . ' />';
 
         return $arrOutput;
     }
 }
-
-// Make instance:
-$wizard = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(AnswersWizard::class);
-$wizard->dispatch();

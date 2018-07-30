@@ -1,4 +1,6 @@
 <?php
+namespace Stratis\Pbsurvey\Backend;
+
 /***************************************************************
 *  Copyright notice
 *
@@ -22,10 +24,6 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
-namespace Stratis\Pbsurvey\Backend;
-
-$GLOBALS['LANG']->includeLLFile('EXT:pbsurvey/Resources/Private/Language/locallang_modfunc1.xml');
-
 use TYPO3\CMS\Backend\Module\AbstractFunctionModule;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -37,6 +35,15 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ModuleFunctions extends AbstractFunctionModule
 {
+    /**
+     * @var \Stratis\Pbsurvey\Backend\SurveyModuleController
+     */
+    public $pObj;
+
+    /**
+     * @var array
+     */
+    protected $arrPageInfo;
 
     /**********************************
      *
@@ -54,6 +61,7 @@ class ModuleFunctions extends AbstractFunctionModule
     function init(&$pObj, $conf)
     {
         parent::init($pObj, $conf);
+        $this->getLanguageService()->includeLLFile('EXT:pbsurvey/Resources/Private/Language/locallang_modfunc1.xml');
         $this->handleExternalFunctionValue();
         $this->arrPageInfo = BackendUtility::readPageAccess($this->pObj->id, $this->perms_clause);
         list($strRequestUri) = explode('#', GeneralUtility::getIndpEnv('REQUEST_URI'));
@@ -124,10 +132,16 @@ class ModuleFunctions extends AbstractFunctionModule
         $arrTemp[] = '<td><strong>' . $arrResults['all'] . '</strong></td>';
         $arrTemp[] = '</tr>';
         $arrTemp[] = '</table>';
-        $strOutput .= $this->pObj->objDoc->section($GLOBALS['LANG']->getLL('title'),
-            BackendUtility::cshItem('_MOD_' . $GLOBALS['MCONF']['name'], 'pbsurveyModfunc1', $GLOBALS['BACK_PATH'],
-                '|<br/>') . implode(chr(13), $arrTemp), 0, 1);
-        $strOutput .= $this->pObj->objDoc->divider(10);
+        $strOutput .= $this->pObj->doc->section(
+            $GLOBALS['LANG']->getLL('title'),
+            BackendUtility::cshItem(
+                '_MOD_' . $GLOBALS['MCONF']['name'], 'pbsurveyModfunc1',
+                $GLOBALS['BACK_PATH'],
+                '|<br/>') . implode(chr(13), $arrTemp),
+            0,
+            1
+        );
+        $strOutput .= $this->pObj->doc->divider(10);
 
         return $strOutput;
     }
@@ -143,7 +157,7 @@ class ModuleFunctions extends AbstractFunctionModule
         foreach ($this->pObj->arrSurveyItems as $arrItem) {
             $arrTemp[] = '<li>' . $arrItem['question'] . '</li>';
         }
-        $strOutput .= $this->pObj->objDoc->section($GLOBALS['LANG']->getLL('list_questions'),
+        $strOutput .= $this->pObj->doc->section($GLOBALS['LANG']->getLL('list_questions'),
             '<ul>' . implode(chr(13), $arrTemp) . '</ul>', 0, 0);
         $strOutput .= '<p><strong>' . $GLOBALS['LANG']->getLL('number_questions') . ': ' . count($this->pObj->arrSurveyItems) . '</strong></p>';
 

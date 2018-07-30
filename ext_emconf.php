@@ -13,8 +13,8 @@ $EM_CONF['pbsurvey'] = array(
     'author_company' => 'Stratis',
     'constraints' => array(
         'depends' => array(
-            'php' => '5.2.0-5.6.99',
-            'typo3' => '6.0.0-7.6.99',
+            'php' => '5.2.0-7.1.99',
+            'typo3' => '7.6.0-8.7.99',
         ),
         'conflicts' => array(),
         'suggests' => array(),

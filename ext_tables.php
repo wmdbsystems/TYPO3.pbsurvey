@@ -29,18 +29,30 @@ $TCA['tt_content']['types']['list']['subtypes_addlist']['pbsurvey_pi1'] = 'pi_fl
     'default CSS-styles');
 
 // initialize 'context sensitive help' (csh)
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_pbsurvey_item',
-    'EXT:pbsurvey/Resources/Private/Language/CSH/locallang_pbsurvey_item.xml');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_pbsurvey_results',
-    'EXT:pbsurvey/Resources/Private/Language/CSH/locallang_pbsurvey_results.xml');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_pbsurvey_answers',
-    'EXT:pbsurvey/Resources/Private/Language/CSH/locallang_pbsurvey_answers.xml');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('xEXT_pbsurvey',
-    'EXT:pbsurvey/Resources/Private/Language/CSH/locallang_manual.xml');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('_MOD_web_txpbsurveyM1',
-    'EXT:pbsurvey/Resources/Private/Language/CSH/locallang_mod1.xml');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('_MOD_web_txpbsurveyM1',
-    'EXT:pbsurvey/Resources/Private/Language/CSH/locallang_modfunc1.xml');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
+    'tx_pbsurvey_item',
+    'EXT:pbsurvey/Resources/Private/Language/CSH/locallang_pbsurvey_item.xml'
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
+    'tx_pbsurvey_results',
+    'EXT:pbsurvey/Resources/Private/Language/CSH/locallang_pbsurvey_results.xml'
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
+    'tx_pbsurvey_answers',
+    'EXT:pbsurvey/Resources/Private/Language/CSH/locallang_pbsurvey_answers.xml'
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
+    'xEXT_pbsurvey',
+    'EXT:pbsurvey/Resources/Private/Language/CSH/locallang_manual.xml'
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
+    '_MOD_web_txpbsurveyM1',
+    'EXT:pbsurvey/Resources/Private/Language/CSH/locallang_mod1.xml'
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
+    '_MOD_web_txpbsurveyM1',
+    'EXT:pbsurvey/Resources/Private/Language/CSH/locallang_modfunc1.xml'
+);
 
 // sets the transformation mode for the RTE to "ts_css" if the extension css_styled_content is installed (default is: "ts")
 if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('css_styled_content')) {
@@ -61,15 +73,11 @@ if (TYPO3_MODE == 'BE') {
                 ),
                 'll_ref' => 'LLL:EXT:pbsurvey/Resources/Private/Language/locallang_mod1.xml:mlang_tabs_tab',
             )
-        ));
-    TYPO3\CMS\Core\Utility\ExtensionManagementUtility::insertModuleFunction('web_SurveyModule',
+        )
+    );
+    TYPO3\CMS\Core\Utility\ExtensionManagementUtility::insertModuleFunction(
+        'web_SurveyModule',
         \Stratis\Pbsurvey\Backend\ModuleFunctions::class, null,
-        'LLL:EXT:pbsurvey/Resources/Private/Language/locallang_modfunc1.xml:moduleFunction');
-
-    // Register conditions wizard
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModulePath('wizard_conditions',
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('pbsurvey') . 'Classes/Wizard/Conditions/');
-    // Register answers wizard
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModulePath('wizard_answers',
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('pbsurvey') . 'Classes/Wizard/Answers/');
+        'LLL:EXT:pbsurvey/Resources/Private/Language/locallang_modfunc1.xml:moduleFunction'
+    );
 }

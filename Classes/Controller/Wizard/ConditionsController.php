@@ -1,67 +1,83 @@
 <?php
-/***************************************************************
-*  Copyright notice
-*
-*  (c) 2005 Patrick Broens (patrick@patrickbroens.nl)
-*  All rights reserved
-*
-*  This script is part of the TYPO3 project. The TYPO3 project is
-*  free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 2 of the License, or
-*  (at your option) any later version.
-*
-*  The GNU General Public License can be found at
-*  http://www.gnu.org/copyleft/gpl.html.
-*
-*  This script is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
 
-namespace Stratis\Pbsurvey\Wizard\ConditionsWizard;
+namespace Stratis\Pbsurvey\Controller\Wizard;
 
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Backend\Template\Components\ButtonBar;
+use TYPO3\CMS\Core\DataHandling\DataHandler;
+use TYPO3\CMS\Core\Imaging\Icon;
+use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use \TYPO3\CMS\Backend\Utility\IconUtility;
+use TYPO3\CMS\Backend\Controller\Wizard\AbstractWizardController;
+use TYPO3\CMS\Core\Utility\HttpUtility;
 
-/**
- * Conditions wizard for the 'pbsurvey' extension.
- * This wizard will help the user to add conditions to pagebreaks
- *
- * @package TYPO3
- * @subpackage pbsurvey
- */
-class ConditionsWizard
+class ConditionsController extends AbstractWizardController
 {
-    var $strExtKey; // Key of the extension
-    var $objDoc; // Document template object
-    var $content; // Content accumulation for the module.
-    var $include_once = array(); // List of files to include.
-    var $strItemsTable = 'tx_pbsurvey_item';
-    var $arrWizardParameters; // Wizard parameters, coming from TCEforms linking to the wizard.
-    var $arrTableParameters; // The array which is constantly submitted by the multidimensional form of this wizard.
-    var $arrGrps = array();
-    var $arrFields = array();
-    var $blnLocalization = false; // Identifies if record is localization instead of 'All' or 'Default' language
+    /**
+     * @var string
+     */
+    public $extKey = 'tx_pbsurvey'; // Key of the extension
+
+    /**
+     * @var string
+     */
+    public $content; // Content accumulation for the module.
+
+    /**
+     * @var array
+     */
+    public $include_once = array(); // List of files to include.
+
+    /**
+     * @var string
+     */
+    public $strItemsTable = 'tx_pbsurvey_item';
+
+    /**
+     * @var array
+     */
+    public $P; // Wizard parameters, coming from TCEforms linking to the wizard.
+
+    /**
+     * @var array
+     */
+    public $tableParameters; // The array which is constantly submitted by the multidimensional form of this wizard.
+
+    /**
+     * @var array
+     */
+    public $arrGrps = array();
+
+    /**
+     * @var array
+     */
+    public $arrFields = array();
+
+    /**
+     * @var bool
+     */
+    public $blnLocalization = false; // Identifies if record is localization instead of 'All' or 'Default' language
+
+    /**
+     * @var IconFactory
+     */
+    protected $iconFactory;
+
+    protected $arrPrevQuestions;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $GLOBALS['LANG']->includeLLFile('EXT:pbsurvey/Resources/Private/Language/locallang_wiz.xml');
+        parent::__construct();
+        $this->getLanguageService()->includeLLFile('EXT:pbsurvey/Resources/Private/Language/locallang_wiz.xml');
         $GLOBALS['SOBE'] = $this;
-    }
 
-    /**********************************
-     *
-     * Configuration functions
-     *
-     **********************************/
+        $this->init();
+    }
 
     /**
      * Initialization of the class
@@ -70,79 +86,118 @@ class ConditionsWizard
      */
     function init()
     {
-        global $BACK_PATH;
-        $this->strExtKey = 'tx_pbsurvey';
-        $this->arrWizardParameters = GeneralUtility::_GP('P');
-        $this->arrTableParameters = GeneralUtility::_GP($this->strExtKey);
-        $this->objDoc = GeneralUtility::makeInstance('TYPO3\\CMS\\Backend\\Template\\DocumentTemplate');
-        $this->objDoc->backPath = $BACK_PATH;
-        $this->objDoc->JScode = $this->objDoc->wrapScriptTags('
-			function jumpToUrl(URL,formEl)	{	//
-				document.location = URL;
-			}
-		');
-        list($strRequestUri) = explode('#', GeneralUtility::getIndpEnv('REQUEST_URI'));
-        $this->objDoc->form = '<form action="' . htmlspecialchars($strRequestUri) . '" method="post" name="wizardConditions">';
+        $this->P = GeneralUtility::_GP('P');
+        $this->tableParameters = GeneralUtility::_GP($this->extKey);
+
+        $this->iconFactory = GeneralUtility::makeInstance(IconFactory::class);
     }
 
     /**
-     * Dispatch on action
+     * Injects the request object for the current request or subrequest
+     * As this controller goes only through the main() method, it is rather simple for now
      *
-     * Calls the requested action
-     *
-     * @return void
+     * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
+     * @return ResponseInterface
      */
-    public function dispatch()
+    public function mainAction(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $this->init();
-        $this->checkReference();
         $this->main();
-        $this->printContent();
+        $response->getBody()->write($this->moduleTemplate->renderContent());
+        return $response;
     }
-
-    /**********************************
-     *
-     * General functions
-     *
-     **********************************/
 
     /**
      * Rendering the table wizard
      *
      * @return    void
      */
-    function main()
+    private function main()
     {
-        global $LANG;
-        $this->previousQuestions();
-        $arrRecord = BackendUtility::getRecord($this->arrWizardParameters['table'], $this->arrWizardParameters['uid']);
-        $strOutput = $this->objDoc->startPage($LANG->getLL('conditions_title'));
-        if ($this->arrWizardParameters['table'] && $this->arrWizardParameters['field'] && $this->arrWizardParameters['uid'] && is_array($this->arrPrevQuestions)) {
-            $strOutput .= $this->objDoc->section($LANG->getLL('conditions_title'), $this->conditionsWizard($arrRecord),
-                0, 1);
+        list($requestUri) = explode('#', GeneralUtility::getIndpEnv('REQUEST_URI'));
+        $this->content .= '<form action="' . htmlspecialchars($requestUri) . '" method="post" id="ConditionsController" name="wizardFrom">';
+
+        if ($this->P['table'] && $this->P['field'] && $this->P['uid']) {
+            $this->previousQuestions();
+            $record = BackendUtility::getRecord($this->P['table'], $this->P['uid']);
+
+            $this->content .= '<h2>' . $this->getLanguageService()->getLL('conditions_title') . '</h2>';
+            if (is_array($this->arrPrevQuestions)) {
+                $this->content .= '<div>' . $this->conditionsWizard($record) . '</div>';
+            }
         } else {
-            $strOutput .= $this->objDoc->section($LANG->getLL('conditions_title'),
-                '<span class="typo3-red">' . $LANG->getLL('conditions_error', 1) . '</span>', 0, 1);
-            $strOutput .= '
-			<div id="c-saveButtonPanel">
-                <a href="#" onclick="' . htmlspecialchars('jumpToUrl(unescape(\'' . rawurlencode($this->arrWizardParameters['returnUrl']) . '\')); return false;') . '"><img class="c-inputButton" src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-document-close.svg" width="21" height="16" ' . BackendUtility::titleAltAttrib($LANG->sL('LLL:EXT:lang/locallang_core.php:rm.closeDoc')) . '" /></a>
-			</div>';
+            $this->content .= '<h2>' . $this->getLanguageService()->getLL('conditions_title') . '</h2>';
+            $this->content .= '<span class="text-danger">' . $this->getLanguageService()->getLL('conditions_error', 1) . '</span>';
         }
-        $strOutput .= $this->objDoc->endPage();
-        $this->content = $strOutput;
+        $this->content .= '</form>';
+
+        $this->getButtons();
+        $this->moduleTemplate->setContent($this->content);
     }
+
+    /**
+     * Create the panel of buttons for submitting the form or otherwise perform operations.
+     */
+    protected function getButtons()
+    {
+        $buttonBar = $this->moduleTemplate->getDocHeaderComponent()->getButtonBar();
+        if ($this->P['table'] && $this->P['field'] && $this->P['uid']) {
+            // CSH
+            $cshButton = $buttonBar->makeHelpButton()
+                ->setModuleName('xMOD_csh_corebe')
+                ->setFieldName('wizard_table_wiz');
+            $buttonBar->addButton($cshButton);
+            // Close
+            $closeButton = $buttonBar->makeLinkButton()
+                ->setHref($this->P['returnUrl'])
+                ->setTitle($this->getLanguageService()->sL('LLL:EXT:lang/Resources/Private/Language/locallang_core.xlf:rm.closeDoc'))
+                ->setIcon($this->moduleTemplate->getIconFactory()->getIcon('actions-close', Icon::SIZE_SMALL));
+            $buttonBar->addButton($closeButton);
+            // Save
+            $saveButton = $buttonBar->makeInputButton()
+                ->setName('_savedok')
+                ->setValue('1')
+                ->setForm('ConditionsController')
+                ->setIcon($this->moduleTemplate->getIconFactory()->getIcon('actions-document-save', Icon::SIZE_SMALL))
+                ->setTitle($this->getLanguageService()->sL('LLL:EXT:lang/Resources/Private/Language/locallang_core.xlf:rm.saveDoc'));
+            // Save & Close
+            $saveAndCloseButton = $buttonBar->makeInputButton()
+                ->setName('_saveandclosedok')
+                ->setValue('1')
+                ->setForm('ConditionsController')
+                ->setTitle($this->getLanguageService()->sL('LLL:EXT:lang/Resources/Private/Language/locallang_core.xlf:rm.saveCloseDoc'))
+                ->setIcon($this->moduleTemplate->getIconFactory()->getIcon(
+                    'actions-document-save-close',
+                    Icon::SIZE_SMALL
+                ));
+            $splitButtonElement = $buttonBar->makeSplitButton()
+                ->addItem($saveButton)
+                ->addItem($saveAndCloseButton);
+
+            $buttonBar->addButton($splitButtonElement, ButtonBar::BUTTON_POSITION_LEFT, 3);
+            // Reload
+            $reloadButton = $buttonBar->makeInputButton()
+                ->setName('_refresh')
+                ->setValue('1')
+                ->setForm('ConditionsController')
+                ->setTitle($this->getLanguageService()->getLL('forms_refresh'))
+                ->setIcon($this->moduleTemplate->getIconFactory()->getIcon('actions-refresh', Icon::SIZE_SMALL));
+            $buttonBar->addButton($reloadButton);
+        }
+    }
+
 
     /**
      * Get the contents of the current record and make a HTML table out of it.
      *
      * @return    string        HTML content for the form.
      */
-    function conditionsWizard($arrRecord)
+    private function conditionsWizard($arrRecord)
     {
-        $arrTable = $this->getTableCode($arrRecord);
-        $strOutput = $this->wizardHTML($arrTable);
+        $tableCode = $this->getTableCode($arrRecord);
+        $content ='<table border="0" cellpadding="2" cellspacing="1">' . $this->groupsHTML($tableCode) . '</table>';
 
-        return $strOutput;
+        return $content;
     }
 
     /**
@@ -151,16 +206,18 @@ class ConditionsWizard
      * @param    array        Current parent record row
      * @return    array        Table code
      */
-    function getTableCode($arrRow)
+    private function getTableCode($arrRow)
     {
-        if (isset($this->arrTableParameters['grps'])) { //Data submitted
+
+        if (isset($this->tableParameters['grps'])) { //Data submitted
             $this->groupControl();
             $this->checkSaveButtons();
-            $arrOutput = $this->arrTableParameters['grps'];
+            $arrOutput = $this->tableParameters['grps'];
         } else {    // No data submitted
-            $arrOutput = $this->groupsArray($arrRow[$this->arrWizardParameters['field']]);
+            $arrOutput = $this->groupsArray($arrRow[$this->P['field']]);
             $arrOutput = is_array($arrOutput) ? $arrOutput : array();
         }
+
 
         return $arrOutput;
     }
@@ -171,7 +228,7 @@ class ConditionsWizard
      * @param    string        Content of backend answers field
      * @return    array        Converted answers information to array
      */
-    function answersArray($strInput)
+    private function answersArray($strInput)
     {
         $strLine = explode(chr(10), $strInput);
         foreach ($strLine as $intKey => $strLineValue) {
@@ -189,7 +246,7 @@ class ConditionsWizard
      * @param    string        Content of backend conditions field
      * @return    array        Converted conditions information to array
      */
-    function groupsArray($strInput)
+    private function groupsArray($strInput)
     {
         $arrConditions = unserialize($strInput);
         if (is_array($arrConditions['grps'])) {
@@ -216,16 +273,6 @@ class ConditionsWizard
         return $arrOutput;
     }
 
-    /**
-     * Outputting the accumulated content to screen
-     *
-     * @return    void
-     */
-    function printContent()
-    {
-        echo $this->content;
-    }
-
     /**********************************
      *
      * Checking functions
@@ -233,25 +280,11 @@ class ConditionsWizard
      **********************************/
 
     /**
-     * Check if there is a reference to the record
-     *
-     * @return    void
-     */
-    function checkReference()
-    {
-        $arrRecord = BackendUtility::getRecord($this->arrWizardParameters['table'], $this->arrWizardParameters['uid']);
-        if (!is_array($arrRecord)) {
-            BackendUtility::typo3PrintError('Wizard Error', 'No reference to record', 0);
-            exit;
-        }
-    }
-
-    /**
      * Perform control action when a button is pressed
      *
      * @return    void
      */
-    function groupControl()
+    private function groupControl()
     {
         $arrFunctions = array(
             'row_up' => '$intKey-1',
@@ -261,59 +294,59 @@ class ConditionsWizard
             'row_remove' => '[$intGroups]',
             'rule_remove' => "[$intKey]['rule'][$grplength-1]",
         );
-        foreach ($this->arrTableParameters['grps'] as $intGroup => $arrGroup) {
+        foreach ($this->tableParameters['grps'] as $intGroup => $arrGroup) {
             foreach ($arrGroup['rule'] as $intRule => $arrRule) {
                 $arrRule['field'] = stripslashes($arrRule['field']);
-                if ($arrRule['field'] == $this->extKey . '_new') {
+                if ($arrRule['field'] == $this->extKey. '_new') {
                     if ($intRule == 0) {
-                        unset($this->arrTableParameters['grps'][$intGroup]);
+                        unset($this->tableParameters['grps'][$intGroup]);
                     } else {
-                        unset($this->arrTableParameters['grps'][$intGroup]['rule'][$intRule]);
+                        unset($this->tableParameters['grps'][$intGroup]['rule'][$intRule]);
                     }
                 }
             }
         }
-        $intGroups = count($this->arrTableParameters['grps']);
+        $intGroups = count($this->tableParameters['grps']);
         foreach ($arrFunctions as $strKey => $strValue) {
-            if (is_array($this->arrTableParameters[$strKey])) {
-                $intKey = key($this->arrTableParameters[$strKey]);
-                if (is_array($this->arrTableParameters['rule_remove'])) {
-                    $intRule = key($this->arrTableParameters['rule_remove'][$intKey]);
+            if (is_array($this->tableParameters[$strKey])) {
+                $intKey = key($this->tableParameters[$strKey]);
+                if (is_array($this->tableParameters['rule_remove'])) {
+                    $intRule = key($this->tableParameters['rule_remove'][$intKey]);
                 }
                 if ($strKey != 'row_turndown') {
-                    $arrTemp = $this->arrTableParameters['grps'][$intKey];
+                    $arrTemp = $this->tableParameters['grps'][$intKey];
                 } else {
-                    $arrTemp = $this->arrTableParameters['grps'][1];
+                    $arrTemp = $this->tableParameters['grps'][1];
                 }
                 if ($strKey == 'row_up') {
-                    $this->arrTableParameters['grps'][$intKey] = $this->arrTableParameters['grps'][$intKey - 1];
+                    $this->tableParameters['grps'][$intKey] = $this->tableParameters['grps'][$intKey - 1];
                 } elseif ($strKey == 'row_down') {
-                    $this->arrTableParameters['grps'][$intKey] = $this->arrTableParameters['grps'][$intKey + 1];
+                    $this->tableParameters['grps'][$intKey] = $this->tableParameters['grps'][$intKey + 1];
                 } elseif ($strKey == 'row_turndown') {
                     for ($intCounter = 2; $intCounter <= $intGroups; $intCounter++) {
-                        $this->arrTableParameters['grps'][$intCounter - 1] = $this->arrTableParameters['grps'][$intCounter];
+                        $this->tableParameters['grps'][$intCounter - 1] = $this->tableParameters['grps'][$intCounter];
                     }
                 } elseif ($strKey == 'row_turnup') {
                     for ($intCounter = $intGroups; $intCounter > 1; $intCounter--) {
-                        $this->arrTableParameters['grps'][$intCounter] = $this->arrTableParameters['grps'][$intCounter - 1];
+                        $this->tableParameters['grps'][$intCounter] = $this->tableParameters['grps'][$intCounter - 1];
                     }
                 } elseif ($strKey == 'row_remove') {
                     for ($intCounter = $intKey; $intCounter <= $intGroups; $intCounter++) {
-                        $this->arrTableParameters['grps'][$intCounter] = $this->arrTableParameters['grps'][$intCounter + 1];
+                        $this->tableParameters['grps'][$intCounter] = $this->tableParameters['grps'][$intCounter + 1];
                     }
                 } elseif ($strKey == 'rule_remove') {
-                    if (count($this->arrTableParameters['grps'][$intKey]['rule']) > 1) {
-                        for ($intCounter = $intRule; $intCounter < count($this->arrTableParameters['grps'][$intKey]['rule']); $intCounter++) {
-                            $this->arrTableParameters['grps'][$intKey]['rule'][$intCounter] = $this->arrTableParameters['grps'][$intKey]['rule'][$intCounter + 1];
+                    if (count($this->tableParameters['grps'][$intKey]['rule']) > 1) {
+                        for ($intCounter = $intRule; $intCounter < count($this->tableParameters['grps'][$intKey]['rule']); $intCounter++) {
+                            $this->tableParameters['grps'][$intKey]['rule'][$intCounter] = $this->tableParameters['grps'][$intKey]['rule'][$intCounter + 1];
                         }
                     }
                 }
                 if (in_array($strKey, array('row_up', 'row_down', 'row_turndown', 'row_turnup'))) {
                     eval("\$this->arrTableParameters['grps'][" . $strValue . "] = \$arrTemp;");
                 } elseif ($strKey == 'row_remove') {
-                    unset($this->arrTableParameters['grps'][$intGroups]);
+                    unset($this->tableParameters['grps'][$intGroups]);
                 } else {
-                    unset($this->arrTableParameters['grps'][$intKey]['rule'][count($this->arrTableParameters['grps'][$intKey]['rule']) - 1]);
+                    unset($this->tableParameters['grps'][$intKey]['rule'][count($this->tableParameters['grps'][$intKey]['rule']) - 1]);
                 }
             }
         }
@@ -325,57 +358,30 @@ class ConditionsWizard
      *
      * @return    void
      */
-    function checkSaveButtons()
+    private function checkSaveButtons()
     {
-        if ($this->arrTableParameters['savedok'] || $this->arrTableParameters['saveandclosedok']) {
-            $tce = GeneralUtility::makeInstance('t3lib_TCEmain');
-            $tce->stripslashes_values = 0;
-            if (count($this->arrTableParameters['grps'])) {
-                $arrSave['grps'] = $this->arrTableParameters['grps'];
-                $arrData[$this->arrWizardParameters['table']][$this->arrWizardParameters['uid']][$this->arrWizardParameters['field']] = serialize($arrSave);
+
+        // If a save button has been pressed, then save the new field content:
+        if ($_POST['_savedok'] || $_POST['_saveandclosedok']) {
+            // Get DataHandler object:
+            /** @var DataHandler $dataHandler */
+            $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+            // Put content into the data array:
+            $dataHandler->stripslashes_values = 0;
+            if (count($this->tableParameters['grps'])) {
+                $arrSave['grps'] = $this->tableParameters['grps'];
+                $data[$this->P['table']][$this->P['uid']][$this->P['field']] = serialize($arrSave);
             } else {
-                $arrData[$this->arrWizardParameters['table']][$this->arrWizardParameters['uid']][$this->arrWizardParameters['field']] = '';
+                $data[$this->P['table']][$this->P['uid']][$this->P['field']] = '';
             }
-            $tce->start($arrData, array());
-            $tce->process_datamap();
-            if ($this->arrTableParameters['saveandclosedok']) {
-                header('Location: ' . GeneralUtility::locationHeaderUrl($this->arrWizardParameters['returnUrl']));
-                exit;
+            // Perform the update:
+            $dataHandler->start($data, []);
+            $dataHandler->process_datamap();
+            // If the save/close button was pressed, then redirect the screen:
+            if ($_POST['_saveandclosedok']) {
+                HttpUtility::redirect(GeneralUtility::sanitizeLocalUrl($this->P['returnUrl']));
             }
         }
-    }
-
-    /**********************************
-     *
-     * Rendering functions
-     *
-     **********************************/
-
-    /**
-     * Creates the HTML for the Conditions Wizard:
-     *
-     * @param    array        Table config array
-     * @return    string        HTML for the table wizard
-     */
-    function wizardHTML($arrTable)
-    {
-        $strOutput = $this->wizardHeader();
-        $strOutput .= $this->groupsHTML($arrTable);
-        $strOutput .= $this->wizardFooter();
-
-        return $strOutput;
-    }
-
-    /**
-     * Draw the header of the wizard
-     *
-     * @return    string        HTML containing the header
-     */
-    function wizardHeader()
-    {
-        $strOutput = '<table border="0" cellpadding="2" cellspacing="1">';
-
-        return $strOutput;
     }
 
     /**
@@ -384,9 +390,8 @@ class ConditionsWizard
      * @param    array        All conditiongroups
      * @return    string        HTML content for the form.
      */
-    function groupsHTML($arrAllGroups)
+    private function groupsHTML($arrAllGroups)
     {
-        global $LANG;
         $intLastGroup = 0;
         $strOutput = '';
         if (is_array($arrAllGroups)) {
@@ -394,8 +399,8 @@ class ConditionsWizard
             // Build Groups
             foreach ($arrAllGroups as $intGroupKey => $arrSingleGroup) {
                 $strOutput .= '<tr class="bgColor5">
-                            <td colspan="3"><b><em>' . $LANG->getLL("conditions_group") . ' ' . ($intLastGroup + 1) . '</em></b></td>
-                            <td colspan="2"><b>' . $LANG->getLL("conditions_condition") . '</b></td>
+                            <td colspan="3"><b><em>' . $this->getLanguageService()->getLL("conditions_group") . ' ' . ($intLastGroup + 1) . '</em></b></td>
+                            <td colspan="2"><b>' . $this->getLanguageService()->getLL("conditions_condition") . '</b></td>
                             </tr>' . chr(10);
                 $strGroupButtons = !$this->blnLocalization ? implode(chr(10),
                     $this->getGroupButtons($intGroupKey, $intGroups)) : '&nbsp;';
@@ -404,34 +409,35 @@ class ConditionsWizard
                     $arrRule['field'] = stripslashes($arrRule['field']);
                     $strOutput .= '<tr class="bgColor4">' . chr(10);
                     if ($intRuleKey != 0) {
-                        $strOutput .= '<td align="right">' . $LANG->getLL("conditions_and") . '</td>' . chr(10);
+                        $strOutput .= '<td align="right">' . $this->getLanguageService()->getLL("conditions_and") . '</td>' . chr(10);
                     } else {
                         $intExtraRow = !$this->blnLocalization ? 1 : 0;
                         $strOutput .= '<td rowspan="' . (count($arrSingleGroup['rule']) + $intExtraRow) . '" class="bgColor5">
                         			' . $strGroupButtons . '
                         			</td>
-                                    <td><b>' . $LANG->getLL("conditions_rules") . '</b></td>' . chr(10);
+                                    <td><b>' . $this->getLanguageService()->getLL("conditions_rules") . '</b></td>' . chr(10);
                     }
                     $strOutput .= '<td style="white-space:nowrap;">';
                     if (!$this->blnLocalization) {
-                        $strOutput .= '<select name="' . $this->strExtKey . '[grps][' . $intGroupKey . '][rule][' . $intRuleKey . '][field]" onChange="submit();">
+                        $strOutput .= '<select name="' . $this->extKey . '[grps][' . $intGroupKey . '][rule][' . $intRuleKey . '][field]" onChange="submit();">
 	                    			' . implode(chr(10), $this->getFields($arrRule['field'])) . '
 	                    			</select>';
                     } else {
                         $arrFields = $this->getFields($arrRule['field']);
-                        $strOutput .= '<input name="' . $this->strExtKey . '[grps][' . $intGroupKey . '][rule][' . $intRuleKey . '][field]" type="hidden" value="' . $arrFields['uid'] . '" />' . $arrFields['title'];
+                        $strOutput .= '<input name="' . $this->extKey . '[grps][' . $intGroupKey . '][rule][' . $intRuleKey . '][field]" type="hidden" value="' . $arrFields['uid'] . '" />' . $arrFields['title'];
                     }
                     $strOutput .= '</td>
                                 <td style="white-space:nowrap;">';
                     $strOutput .= implode(chr(10),
-                        $this->getOperators($this->strExtKey . '[grps][' . $intGroupKey . '][rule][' . $intRuleKey . ']',
+                        $this->getOperators($this->extKey . '[grps][' . $intGroupKey . '][rule][' . $intRuleKey . ']',
                             $arrRule));
                     $strOutput .= '</td>
                                 <td width="11">';
                     // No trashbin when single rule in a group
                     if (!$this->blnLocalization && count($arrSingleGroup['rule']) > 1) {
-                        $strOutput .= '<input type="image" name="' . $this->strExtKey . '[rule_remove][' . $intGroupKey . '][' . $intRuleKey . ']"' . IconUtility::skinImg($this->objDoc->backPath,
-                                'gfx/garbage.gif') . BackendUtility::titleAltAttrib($LANG->getLL("conditions_ruleRemove")) . ' />' . chr(10);
+                        $strOutput .= $this->iconFactory->getIcon('actions-delete', Icon::SIZE_SMALL);
+                        $strOutput .= '<input type="image" name="' . $this->extKey . '[rule_remove][' . $intGroupKey . '][' . $intRuleKey . ']"'
+                            . BackendUtility::titleAltAttrib($this->getLanguageService()->getLL("conditions_ruleRemove")) . ' />' . chr(10);
                     } else {
                         $strOutput .= '&nbsp;';
                     }
@@ -439,9 +445,9 @@ class ConditionsWizard
                 }
                 if (!$this->blnLocalization) {
                     $strOutput .= '<tr class="bgColor4">
-	                            <td align="right">' . $LANG->getLL("conditions_and") . '</td>
-	                            <td><select name="' . $this->strExtKey . '[grps][' . $intGroupKey . '][rule][' . ($intRuleKey + 1) . '][field]" onChange="submit();">
-	                            <option value="' . $this->extKey . '_new">' . $LANG->getLL('conditions_newField') . '</option>
+	                            <td align="right">' . $this->getLanguageService()->getLL("conditions_and") . '</td>
+	                            <td><select name="' . $this->extKey . '[grps][' . $intGroupKey . '][rule][' . ($intRuleKey + 1) . '][field]" onChange="submit();">
+	                            <option value="' . $this->extKey . '_new">' . $this->getLanguageService()->getLL('conditions_newField') . '</option>
 	                            ' . implode(chr(10), $this->getFields()) . '
 	                            </select></td>
 	                            <td colspan="2"></td>
@@ -453,13 +459,13 @@ class ConditionsWizard
         // Build New Group
         if (!$this->blnLocalization) {
             $strOutput .= '<tr class="bgColor6">
-	                    <td colspan="5"><b>' . $LANG->getLL("conditions_new") . '</b></td>
+	                    <td colspan="5"><b>' . $this->getLanguageService()->getLL("conditions_new") . '</b></td>
 	                    </tr>
 	                    <tr class="bgColor6">
 	                    <td>&nbsp;</td>
-	                    <td><b>' . $LANG->getLL("conditions_rules") . '</b></td>
-	                    <td colspan="3"><select name="' . $this->strExtKey . '[grps][' . ($intLastGroup + 1) . '][rule][0][field]" onChange="submit();">
-	                    <option value="' . $this->extKey . '_new">' . $LANG->getLL('conditions_newField') . '</option>' . implode(chr(10),
+	                    <td><b>' . $this->getLanguageService()->getLL("conditions_rules") . '</b></td>
+	                    <td colspan="3"><select name="' . $this->extKey . '[grps][' . ($intLastGroup + 1) . '][rule][0][field]" onChange="submit();">
+	                    <option value="' . $this->extKey . '_new">' . $this->getLanguageService()->getLL('conditions_newField') . '</option>' . implode(chr(10),
                     $this->getFields()) . '
 	                    </select></td>
 	                    </tr>' . chr(10);
@@ -475,7 +481,7 @@ class ConditionsWizard
      * @param    integer        Amount of groups
      * @return    array        HTML for the control buttons
      */
-    function getGroupButtons($intGroupKey, $intGroups)
+    private function getGroupButtons($intGroupKey, $intGroups)
     {
         if ($intGroups > 1) {
             if ($intGroupKey == 1) {
@@ -503,18 +509,19 @@ class ConditionsWizard
      * @param    integer        Keynumber of the current group
      * @return    string        HTML for the button
      */
-    function groupButton($strName, $intKey)
+    private function groupButton($strName, $intKey)
     {
-        global $LANG;
         $arrOptions = array(
-            'row_turndown' => array('gfx/turn_down.gif', 'table_bottom'),
-            'row_up' => array('gfx/pil2up.gif', 'table_top'),
-            'row_remove' => array('gfx/garbage.gif', 'table_removeRow'),
-            'row_turnup' => array('gfx/turn_up.gif', 'table_up'),
-            'row_down' => array('gfx/pil2down.gif', 'table_down')
+            'row_turndown' => array('actions-view-go-down', 'table_bottom'),
+            'row_up' => array('actions-view-list-collapse', 'table_top'),
+            'row_remove' => array('actions-delete', 'table_removeRow'),
+            'row_turnup' => array('actions-view-go-down', 'table_up'),
+            'row_down' => array('actions-view-list-expand', 'table_down')
         );
-        $strOutput = '<input type="image" name="' . $this->strExtKey . '[' . $strName . '][' . $intKey . ']"' . IconUtility::skinImg($this->objDoc->backPath,
-                $arrOptions[$strName][0]) . BackendUtility::titleAltAttrib($LANG->getLL($arrOptions[$strName][1])) . ' /><br />';
+
+        $strOutput = $this->iconFactory->getIcon( $arrOptions[$strName][0], Icon::SIZE_SMALL);
+        $strOutput .= '<input type="image" name="' . $this->extKey . '[' . $strName . '][' . $intKey . ']"'
+            . BackendUtility::titleAltAttrib($this->getLanguageService()->getLL($arrOptions[$strName][1])) . ' /><br />';
 
         return $strOutput;
     }
@@ -526,16 +533,15 @@ class ConditionsWizard
      * @param    string        uid of the question
      * @return    array        Option list of previous questions
      */
-    function getFields($intQuestion = null)
+    private function getFields($intQuestion = null)
     {
-        global $LANG;
         foreach ($this->arrPrevQuestions as $arrValue) {
             if ($intQuestion == $arrValue["uid"]) {
                 $strSelected = ' selected="selected" ';
             } else {
                 $strSelected = '';
             }
-            $strTitle = '[' . $LANG->getLL("conditions_page") . ' ' . $arrValue["page"] . '] ' . $arrValue["question"];
+            $strTitle = '[' . $this->getLanguageService()->getLL("conditions_page") . ' ' . $arrValue["page"] . '] ' . $arrValue["question"];
             if (!$this->blnLocalization) {
                 $arrOutput[] = '<option value="' . $arrValue["uid"] . '"' . $strSelected . '>' . substr($strTitle, 0,
                         40) . '...' . '</option>';
@@ -553,26 +559,26 @@ class ConditionsWizard
      *
      * @param    string        Current name
      * @param    array        Current rule
-     * @return    array      HTML content for answers pulldown or input field.
+     * @return   array      HTML content for answers pulldown or input field.
      */
-    function getAnswers($strName, $arrRule)
+    private function getAnswers($strName, $arrRule)
     {
-        global $LANG;
         $arrCurQuestion = $this->arrPrevQuestions[stripslashes($arrRule['field'])];
+
         if (in_array($arrCurQuestion['question_type'], array(1, 2, 3, 4, 5, 23))) {
             if (!$this->blnLocalization) {
                 $arrOutput[] = '<select name ="' . $strName . '[value]" onChange="submit();")>';
                 if (in_array($arrCurQuestion['question_type'],
                         array(1, 3)) && $arrCurQuestion['answers_allow_additional']) {
-                    $arrOutput[] = '<option value="">' . $LANG->getLL('conditions_none') . '</option>';
+                    $arrOutput[] = '<option value="">' . $this->getLanguageService()->getLL('conditions_none') . '</option>';
                 }
             }
             if (in_array($arrCurQuestion['question_type'], array(1, 2, 3, 23))) {
                 $arrOptions = $this->answersArray($arrCurQuestion['answers']);
             } elseif ($arrCurQuestion['question_type'] == 4) {
-                $arrOptions = array(1 => $LANG->getLL('conditions_false'), 2 => $LANG->getLL('conditions_true'));
+                $arrOptions = array(1 => $this->getLanguageService()->getLL('conditions_false'), 2 => $this->getLanguageService()->getLL('conditions_true'));
             } else {
-                $arrOptions = array(1 => $LANG->getLL('conditions_no'), 2 => $LANG->getLL('conditions_yes'));
+                $arrOptions = array(1 => $this->getLanguageService()->getLL('conditions_no'), 2 => $this->getLanguageService()->getLL('conditions_yes'));
             }
             foreach ($arrOptions as $intKey => $strValue) {
                 if ($arrRule['value'] == $intKey) {
@@ -594,7 +600,7 @@ class ConditionsWizard
             }
             if (in_array($arrCurQuestion['question_type'],
                     array(1, 3)) && $arrCurQuestion['answers_allow_additional']) {
-                $arrOutput[] = '<br />' . $LANG->getLL('conditions_or') . ' <input name ="' . $strName . '[value2]" type="text" value="' . $arrRule['value2'] . '" />';
+                $arrOutput[] = '<br />' . $this->getLanguageService()->getLL('conditions_or') . ' <input name ="' . $strName . '[value2]" type="text" value="' . $arrRule['value2'] . '" />';
             }
         } elseif (in_array($arrCurQuestion['question_type'], array(7, 10, 11, 12, 13, 14, 15))) {
             $arrOutput[] = '<input name ="' . $strName . '[value]" type="text" value="' . $arrRule['value'] . '" />';
@@ -610,9 +616,8 @@ class ConditionsWizard
      * @param    array        Current rule
      * @return    array        HTML content for operator pulldown.
      */
-    function getOperators($strName, $arrRule)
+    private function getOperators($strName, $arrRule)
     {
-        global $LANG;
         $arrOptions = array(
             'eq' => 'equal',
             'ne' => 'notEqual',
@@ -658,49 +663,29 @@ class ConditionsWizard
                 'lt',
                 'le'
             ) : array('eq', 'ne', 'gt', 'ge', 'lt', 'le', 'set', 'notset');
+        } else {
+            $arrOperators = [];
         }
         if (!$this->blnLocalization) {
             $arrOutput[] = '<select name ="' . $strName . '[operator]" onChange="submit();")>';
             foreach ($arrOperators as $strKey) {
-                $arrOutput[] = '<option value="' . $strKey . '" ' . ($arrRule['operator'] == $strKey ? 'selected="selected"' : '') . '>' . $LANG->getLL('conditions_' . $arrOptions[$strKey]) . '</option>';
+                $arrOutput[] = '<option value="' . $strKey . '" ' . ($arrRule['operator'] == $strKey ? 'selected="selected"' : '') . '>' . $this->getLanguageService()->getLL('conditions_' . $arrOptions[$strKey]) . '</option>';
             }
             $arrOutput[] = '</select>';
         } else {
             foreach ($arrOperators as $strKey) {
                 if ($arrRule['operator'] == $strKey) {
                     $arrOutput[] = '<input type="hidden" name="' . $strName . '[operator]" value="' . $strKey . '" />';
-                    $arrOutput[] = $LANG->getLL('conditions_' . $arrOptions[$strKey]) . '<br />';
+                    $arrOutput[] = $this->getLanguageService()->getLL('conditions_' . $arrOptions[$strKey]) . '<br />';
                 }
             }
         }
-        $arrOutput[] = ($arrRule['operator'] == 'set' || $arrRule['operator'] == 'notset') ? '' : implode(chr(10),
-            $this->getAnswers($strName, $arrRule));
+        if ($arrRule['operator'] !== 'set' || $arrRule['operator'] !== 'notset') {
+            $answers = $this->getAnswers($strName, $arrRule);
+            $arrOutput[] = implode(chr(10), $answers);
+        }
 
         return $arrOutput;
-    }
-
-    /**
-     * Draw the footer of the wizard
-     *
-     * @return    string        HTML containing the footer
-     */
-    function wizardFooter()
-    {
-        global $LANG;
-        $strOutput = '
-			</table>
-			<div id="c-saveButtonPanel">
-                <input type="image" class="c-inputButton" name="' . $this->strExtKey . '[savedok]"' . IconUtility::skinImg($this->objDoc->backPath,
-                'gfx/savedok.gif') . BackendUtility::titleAltAttrib($LANG->sL('LLL:EXT:lang/locallang_core.php:rm.saveDoc')) . '" />
-                <input type="image" class="c-inputButton" name="' . $this->strExtKey . '[saveandclosedok]"' . IconUtility::skinImg($this->objDoc->backPath,
-                'gfx/saveandclosedok.gif') . BackendUtility::titleAltAttrib($LANG->sL('LLL:EXT:lang/locallang_core.php:rm.saveCloseDoc')) . '" />
-                <a href="#" onclick="' . htmlspecialchars('jumpToUrl(unescape(\'' . rawurlencode($this->arrWizardParameters['returnUrl']) . '\')); return false;') . '"><img class="c-inputButton"' . IconUtility::skinImg($this->objDoc->backPath,
-                'gfx/closedok.gif') . BackendUtility::titleAltAttrib($LANG->sL('LLL:EXT:lang/locallang_core.php:rm.closeDoc')) . '" /></a>
-                <input type="image" class="c-inputButton" name="_refresh"' . IconUtility::skinImg($this->objDoc->backPath,
-                'gfx/refresh_n.gif') . BackendUtility::titleAltAttrib($LANG->getLL('forms_refresh', 1)) . '" />
-			</div>';
-
-        return $strOutput;
     }
 
     /**********************************
@@ -715,23 +700,25 @@ class ConditionsWizard
      *
      * @return    void
      */
-    function previousQuestions()
+    private function previousQuestions()
     {
         $arrValidTypes = array(1, 2, 3, 4, 5, 7, 10, 11, 12, 13, 14, 15, 23);
-        $arrCurRecord = BackendUtility::getRecord($this->arrWizardParameters["table"],
-            $this->arrWizardParameters["uid"]);
+
+        $arrCurRecord = BackendUtility::getRecord($this->P["table"],
+            $this->P["uid"]);
         if (!in_array(intval($arrCurRecord['sys_language_uid']), array(-1, 0))) {
             $this->blnLocalization = true;
         }
+
         $strWhereConf = '1=1';
-        $strWhereConf .= ' AND pid=' . $this->arrWizardParameters["pid"];
+        $strWhereConf .= ' AND pid=' . $this->P["pid"];
         $strWhereConf .= ' AND ' . $this->strItemsTable . '.sys_language_uid IN (0,-1)';
         $strWhereConf .= ' AND sorting<' . $arrCurRecord["sorting"];
         $strWhereConf .= BackendUtility::BEenableFields($this->strItemsTable);
         $strWhereConf .= BackendUtility::deleteClause($this->strItemsTable);
         $strOrderByConf = 'sorting ASC';
-        $dbRes = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', $this->arrWizardParameters["table"], $strWhereConf, '',
-            $strOrderByConf);
+
+        $dbRes = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', $this->P["table"], $strWhereConf, '', $strOrderByConf);
         while ($arrDbRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbRes)) {
             if ($this->blnLocalization) {
                 $arrDbRow = $this->getRecordOverlay($this->strItemsTable, $arrDbRow, $arrCurRecord['sys_language_uid']);
@@ -743,7 +730,7 @@ class ConditionsWizard
                     $intPage = 1;
                 }
             }
-            if ($arrDbRow['question_type'] <> 22) {
+            if ($arrDbRow['question_type'] != 22) {
                 if (in_array($arrDbRow['question_type'], $arrValidTypes)) {
                     $arrDbRow['page'] = $intPage;
                     $this->arrPrevQuestions[$arrDbRow['uid']] = $arrDbRow;
@@ -763,17 +750,16 @@ class ConditionsWizard
      * @param    integer        Pointer to the sys_language uid for content of the current record.
      * @return    mixed        Returns the input record, possibly overlaid with a translation.
      */
-    function getRecordOverlay($strTable, $arrRow, $intSysLanguageContent)
+    private function getRecordOverlay($strTable, $arrRow, $intSysLanguageContent)
     {
-        global $TCA;
         if ($arrRow['uid'] > 0 && $arrRow['pid'] > 0) {
-            if ($TCA[$strTable] && $TCA[$strTable]['ctrl']['languageField'] && $TCA[$strTable]['ctrl']['transOrigPointerField']) {
+            if ($GLOBALS['TCA'][$strTable] && $GLOBALS['TCA'][$strTable]['ctrl']['languageField'] && $GLOBALS['TCA'][$strTable]['ctrl']['transOrigPointerField']) {
                 if ($intSysLanguageContent > 0) {
-                    if ($arrRow[$TCA[$strTable]['ctrl']['languageField']] <= 0) {
+                    if ($arrRow[$GLOBALS['TCA'][$strTable]['ctrl']['languageField']] <= 0) {
                         $strWhereConf = '1=1';
                         $strWhereConf .= ' AND pid=' . intval($arrRow['pid']);
-                        $strWhereConf .= ' AND ' . $TCA[$strTable]['ctrl']['languageField'] . '=' . intval($intSysLanguageContent);
-                        $strWhereConf .= ' AND ' . $TCA[$strTable]['ctrl']['transOrigPointerField'] . '=' . intval($arrRow['uid']);
+                        $strWhereConf .= ' AND ' . $GLOBALS['TCA'][$strTable]['ctrl']['languageField'] . '=' . intval($intSysLanguageContent);
+                        $strWhereConf .= ' AND ' . $GLOBALS['TCA'][$strTable]['ctrl']['transOrigPointerField'] . '=' . intval($arrRow['uid']);
                         $strWhereConf .= BackendUtility::BEenableFields($strTable);
                         $strWhereConf .= BackendUtility::deleteClause($strTable);
                         $dbRes = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', $strTable, $strWhereConf, '', '', '1');
@@ -781,18 +767,18 @@ class ConditionsWizard
                         if (is_array($arrOlRow)) {
                             foreach ($arrRow as $strKey => $strValue) {
                                 if ($strKey != 'uid' && $strKey != 'pid' && isset($arrOlRow[$strKey])) {
-                                    if ($TCA[$strTable]['columns'][$strKey]['l10n_mode'] != 'exclude' && ($TCA[$strTable]['columns'][$strKey]['l10n_mode'] != 'mergeIfNotBlank' || strcmp(trim($arrOlRow[$strKey]),
+                                    if ($GLOBALS['TCA'][$strTable]['columns'][$strKey]['l10n_mode'] != 'exclude' && ($GLOBALS['TCA'][$strTable]['columns'][$strKey]['l10n_mode'] != 'mergeIfNotBlank' || strcmp(trim($arrOlRow[$strKey]),
                                                 ''))) {
                                         $arrRow[$strKey] = $arrOlRow[$strKey];
                                     }
                                 }
                             }
                         }
-                    } elseif ($intSysLanguageContent != $arrRow[$TCA[$strTable]['ctrl']['languageField']]) {
+                    } elseif ($intSysLanguageContent != $arrRow[$GLOBALS['TCA'][$strTable]['ctrl']['languageField']]) {
                         unset($arrRow);
                     }
                 } else {
-                    if ($arrRow[$TCA[$strTable]['ctrl']['languageField']] > 0) {
+                    if ($arrRow[$GLOBALS['TCA'][$strTable]['ctrl']['languageField']] > 0) {
                         unset($arrRow);
                     }
                 }
@@ -802,7 +788,3 @@ class ConditionsWizard
         return $arrRow;
     }
 }
-
-// Make instance:
-$wizard = GeneralUtility::makeInstance(ConditionsWizard::class);
-$wizard->dispatch();
